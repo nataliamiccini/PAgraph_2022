@@ -5,7 +5,7 @@ import { DataTypes, Model, Sequelize } from 'sequelize';
  * Instanziazione della connessione verso il RDBMS
  */
 const sequelize: Sequelize = Singleton.getConnection();
-export const Graph = sequelize.define('Graph', {
+export const Graph = sequelize.define('graph', {
     id_graph: {
         type: DataTypes.INTEGER,
         primaryKey: true,

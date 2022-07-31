@@ -6,7 +6,7 @@ services:
         environment:
           - MYSQL_ROOT_PASSWORD=$ROOT_PASS
           - MYSQL_DATABASE=$DB
-          - MYSQL_USER=$USER
+          - MYSQL_USER='user'
           - MYSQL_PASSWORD=$PASS
         ports:
           - 3000:3306
