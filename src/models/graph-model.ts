@@ -6,7 +6,7 @@ import { DataTypes, Model, Sequelize } from 'sequelize';
  */
 const sequelize: Sequelize = Singleton.getConnection();
 export const Graph = sequelize.define('graph', {
-    id_node: {
+    id_edge: {
         type: DataTypes.INTEGER,
         primaryKey: true
     },

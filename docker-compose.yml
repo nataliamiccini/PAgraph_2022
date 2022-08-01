@@ -6,7 +6,7 @@ services:
         environment:
           - MYSQL_ROOT_PASSWORD=root
           - MYSQL_DATABASE=GraphDB
-          - MYSQL_USER=admin
+          - MYSQL_USER=user
           - MYSQL_PASSWORD=root
         ports:
           - 3000:3306
