@@ -6,10 +6,13 @@ import { DataTypes, Model, Sequelize } from 'sequelize';
  */
 const sequelize: Sequelize = Singleton.getConnection();
 export const Graph = sequelize.define('graph', {
+    id_node: {
+        type: DataTypes.INTEGER,
+        primaryKey: true
+    },
     id_graph: {
         type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+        allowNull: false
     },
     node_a: {
         type: DataTypes.STRING(100),
