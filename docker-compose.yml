@@ -4,10 +4,10 @@ services:
         image: mysql
         restart: always
         environment:
-          - MYSQL_ROOT_PASSWORD=$ROOT_PASS
-          - MYSQL_DATABASE=$DB
-          - MYSQL_USER='user'
-          - MYSQL_PASSWORD=$PASS
+          - MYSQL_ROOT_PASSWORD=root
+          - MYSQL_DATABASE=GraphDB
+          - MYSQL_USER=admin
+          - MYSQL_PASSWORD=root
         ports:
           - 3000:3306
         volumes:
@@ -22,12 +22,12 @@ services:
         ports:
           - 8080:8080
         environment:
-          - MYSQL_ROOT_PASSWORD=$ROOT_PASS
-          - MYSQL_DATABASE=$DB
-          - MYSQL_HOST=$HOST
-          - MYSQL_PORT=$PORT
-          - MYSQL_USER=$USER
-          - MYSQL_PASSWORD=$PASS
+          - MYSQL_ROOT_PASSWORD=root
+          - MYSQL_DATABASE=GraphDB
+          - MYSQL_HOST=dbmysql
+          - MYSQL_PORT=3306
+          - MYSQL_USER=user
+          - MYSQL_PASSWORD=root
         env_file:
           - .env
         depends_on:
