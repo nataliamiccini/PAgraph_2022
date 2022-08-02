@@ -64,7 +64,7 @@ let val;
         console.log(i+ " costo "+ costo[z]);
         var ID = Math.random().toString(36);
         
-           Graph.create({id_edge:ID,id_graph:10,node_a:nodi_esterni[i],node_b:String(nodi_interni[z]),weight_edge:costo[z],modify_date:"2022-07-31T15:40:00+01:00"}).then((arr)=>{
+           Graph.create({id_edge:ID,id_graph:11,node_a:nodi_esterni[i],node_b:String(nodi_interni[z]),weight_edge:costo[z],modify_date:"2022-07-31T15:40:00+01:00",FKuser_id:"Wos78BnB09"}).then((arr)=>{
           
       console.log("fatto");
     })

@@ -23,10 +23,6 @@ app.post('/createGraph',function(req: any, res: any) {
 
 });
 
-const a = new Map()
-a.set( 'A', { 'B': 1 })
-console.log(a);
-
 
 
 app.listen(8080 ,()=> console.log("Listening on port 8080"))
