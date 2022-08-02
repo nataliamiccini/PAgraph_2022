@@ -5,6 +5,13 @@ import { DataTypes, Model, Sequelize } from 'sequelize';
  * Instanziazione della connessione verso il RDBMS
  */
 const sequelize: Sequelize = Singleton.getConnection();
+
+ /**
+  * Definizione dell'ORM attraverso il quale effettuare le query su DB.
+  * É stata utilizzata la libreria Sequelize che permette di definire un modello per ogni
+  * relazione.
+ */ 
+
 export const Graph = sequelize.define('graph', {
     id_edge: {
         type: DataTypes.INTEGER,
@@ -30,6 +37,10 @@ export const Graph = sequelize.define('graph', {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.NOW
+    },
+    FKuser_id: {
+        type: DataTypes.STRING(100),
+        allowNull: false
     }
 }, {
     modelName: 'graph',
