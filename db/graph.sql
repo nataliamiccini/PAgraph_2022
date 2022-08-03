@@ -14,7 +14,7 @@ CREATE TABLE user (
   name varchar(30) NOT NULL,
   surname varchar(30) NOT NULL,
   role varchar(15) NOT NULL,
-  token int(11) NOT NULL
+  token DECIMAL(6,2) NOT NULL
 );
 
 ALTER TABLE graph

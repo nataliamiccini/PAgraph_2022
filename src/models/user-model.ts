@@ -34,7 +34,7 @@ import { DataTypes, Model, Sequelize } from 'sequelize';
          allowNull: false
      },
      token: {
-         type: DataTypes.INTEGER,
+         type: DataTypes.DECIMAL,
          allowNull: false
      }
  }, 

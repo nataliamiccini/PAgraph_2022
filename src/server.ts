@@ -18,8 +18,9 @@ var jsonParser = bodyParser.json()
 app.post('/createGraph',function(req: any, res: any) { 
     const route = new Graph(req.body) 
     console.log(route)
-    Service.createGraph(req.body,res);
-    res.json("Grafo creato")
+    //Service.createGraph(req.body,res);
+    Service.endGraph(req.body,res)
+    //res.json("Grafo creato")
 
 });
 
