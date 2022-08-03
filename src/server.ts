@@ -5,8 +5,9 @@ import * as Service from './services/service'
 const app = express();
 
 app.use(express.json());
+
 app.get('/all', function(req: any, res: any) {    
-    Service.showALL( req, res);
+    Service.showAllGraph( req, res);
 });
 app.get('/test', function(req: any, res: any) {    
     Service.test(req.body.id_graph, res);
@@ -24,6 +25,10 @@ app.post('/createGraph',function(req: any, res: any) {
 
 });
 
-
+app.get('/path', async function(req: any, res: any) {    
+  await Service.path(req.body.id_graph, req.body.node_a, req.body.node_b, res).then( result => {
+    res.json(result)
+  })
+});
 
 app.listen(8080 ,()=> console.log("Listening on port 8080"))
