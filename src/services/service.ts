@@ -13,6 +13,7 @@ export function showAllGraph(req: any, res: any) {
   });
 };
 
+<<<<<<< Updated upstream
 export function test(id_graph:number, res:any){
   let elem=[];
   Graph.findAll({attributes: ['node_a'], where:{id_graph: id_graph}}).then( arr => {
@@ -20,6 +21,87 @@ export function test(id_graph:number, res:any){
   });
 }
 
+=======
+
+export  async function nodi(req:number,res:any){
+    let elem=[];
+   await Graph.findAll({attributes: ['weight_edge'],where:{id_graph: req}}).then(arr=>{
+        //res.json(arr);
+        elem=arr
+        console.log(arr);
+    });
+    return elem;
+}
+
+export async function WeightOfNodes(id_edge: string):Promise<any>{
+  let elem=[];
+   await Graph.findAll({attributes: ['weight_edge'], where:{ id_edge: id_edge}}).then(arr=>{
+      //res.json(arr);
+      console.log(arr);
+      elem=arr
+  });
+  return elem;
+}
+
+/*export async function test ():Promise<any>{
+  let a;
+  let A=["a","0.146lnqn473k"]
+  A.forEach(
+    function(x){
+  sequelize.query("SELECT * from graph where id_edge="+"'"+x+"'",
+  {raw:true,
+    type:QueryTypes.SELECT}
+    ).then(arr2=>{
+      console.log(arr2)
+      console.log("ok")
+      a=arr2
+    });
+
+   } )
+return a;
+}*/
+
+export async function updateWeight(new_weight: number, id_edge:any, res:any){
+  let alpha=0.8;
+  let keys;
+id_edge.forEach(
+  function(x){
+  Graph.findAll({attributes: ['weight_edge'], where:{ id_edge: x}}).then(arr=>{
+   console.log(arr);
+   keys =Object.values(arr);
+
+   for(let i=0; i<keys.length;i++){ 
+
+      keys[i].weight_edge=alpha*keys[i].weight_edge+(1-alpha)*new_weight;
+
+      const result= sequelize.query(
+            "UPDATE graph SET weight_edge="+keys[i].weight_edge+" WHERE id_edge="+"'"+x+"'",
+            {raw:true,
+            type:QueryTypes.RAW}
+          ).then(arr2=>{
+            res.json("Il peso dell'arco è stato aggiornato")
+            
+          });
+      }
+ });
+});
+}
+export function filterGraph(num_nodi:number,num_archi:number,res:any){
+
+}
+/*export function findMAX(){
+  sequelize.query(
+    "SELECT MAX(id_graph) as max FROM graph",
+    {raw:true,
+      type:QueryTypes.SELECT}
+  ).then(arr=>{
+    console.log(arr.map(item=>(item as any).max)[0])
+    arr.map(item=>(item as any).max)[0];
+  })
+}*/
+
+
+>>>>>>> Stashed changes
 let max=0;
 export function createGraph(req:any,res:any){
   let costo=[];

@@ -3,7 +3,7 @@ CREATE TABLE graph (
     id_graph int(11) NOT NULL, 
     node_a varchar(100) NOT NULL,
     node_b varchar(100) NOT NULL,
-    weight_edge int(11) NOT NULL,
+    weight_edge DECIMAL(6,2) NOT NULL,
     modify_date varchar(100) NOT NULL,
     FKuser_id varchar(100) NOT NULL
 ); 

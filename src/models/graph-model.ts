@@ -14,7 +14,7 @@ const sequelize: Sequelize = Singleton.getConnection();
 
 export const Graph = sequelize.define('graph', {
     id_edge: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(100),
         primaryKey: true
     },
     id_graph: {
@@ -30,7 +30,7 @@ export const Graph = sequelize.define('graph', {
         allowNull: false
     },
     weight_edge: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DECIMAL,
         allowNull: false
     },
     modify_date: {
