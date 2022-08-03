@@ -13,13 +13,9 @@ const sequelize: Sequelize = Singleton.getConnection();
  */ 
 
 export const Graph = sequelize.define('graph', {
-    id_edge: {
-        type: DataTypes.STRING(100),
-        primaryKey: true
-    },
     id_graph: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        primaryKey: true
     },
     node_a: {
         type: DataTypes.STRING(100),
@@ -28,22 +24,9 @@ export const Graph = sequelize.define('graph', {
     node_b: {
         type: DataTypes.STRING(100),
         allowNull: false
-    },
-    weight_edge: {
-        type: DataTypes.DECIMAL,
-        allowNull: false
-    },
-    modify_date: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW
-    },
-    FKuser_id: {
-        type: DataTypes.STRING(100),
-        allowNull: false
     }
 }, {
-    modelName: 'graph',
+    modelName: 'grah',
     timestamps: false,
     freezeTableName: true
 });

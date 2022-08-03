@@ -1,5 +1,6 @@
 import { User } from '../models/user-model';
-import { Graph } from '../models/graph-model';
+import { Edge } from '../models/edge-model';
+import { Graph } from '../models/graph-models';
 import { Model, Sequelize, where, QueryTypes } from 'sequelize';
 import { Singleton } from '../connection/Singleton';
 
@@ -7,7 +8,7 @@ const Graph1 = require('node-dijkstra')
 const sequelize: Sequelize = Singleton.getConnection();
 
 export function showAllGraph(req: any, res: any) {
-  Graph.findAll({}).then(arr=>{
+  Edge.findAll({}).then(arr=>{
       console.log(arr);
       res.json(arr);
   });
@@ -15,14 +16,14 @@ export function showAllGraph(req: any, res: any) {
 
 export function test(id_graph:number, res:any){
   let elem=[];
-  Graph.findAll({attributes: ['node_a'], where:{id_graph: id_graph}}).then( arr => {
+  Edge.findAll({attributes: ['node_a'], where:{id_graph: id_graph}}).then( arr => {
       res.json(arr);
   });
 }
 
 export  async function nodi(req:number,res:any){
     let elem=[];
-   await Graph.findAll({attributes: ['weight_edge'],where:{id_graph: req}}).then(arr=>{
+   await Edge.findAll({attributes: ['weight_edge'],where:{id_graph: req}}).then(arr=>{
         //res.json(arr);
         elem=arr
         console.log(arr);
@@ -32,7 +33,7 @@ export  async function nodi(req:number,res:any){
 
 export async function WeightOfNodes(id_edge: string):Promise<any>{
   let elem=[];
-   await Graph.findAll({attributes: ['weight_edge'], where:{ id_edge: id_edge}}).then(arr=>{
+   await Edge.findAll({attributes: ['weight_edge'], where:{ id_edge: id_edge}}).then(arr=>{
       //res.json(arr);
       console.log(arr);
       elem=arr
@@ -63,7 +64,7 @@ export async function updateWeight(new_weight: number, id_edge:any, res:any){
   let keys;
 id_edge.forEach(
   function(x){
-  Graph.findAll({attributes: ['weight_edge'], where:{ id_edge: x}}).then(arr=>{
+  Edge.findAll({attributes: ['weight_edge'], where:{ id_edge: x}}).then(arr=>{
    console.log(arr);
    keys =Object.values(arr);
 
@@ -157,7 +158,7 @@ export function createGraph(req:any,res:any){
         n_interni=tot_i.length;
         tot_e.add(nodi_interni[z])
              
-        Graph.create({id_edge:ID,id_graph:max+2,node_a:nodi_esterni[i],node_b:String(nodi_interni[z]),weight_edge:costo[z],modify_date:"2022-07-31T15:40:00+01:00",FKuser_id:"Wos78BnB09"}).then((arr)=>{
+        Edge.create({id_edge:ID,id_graph:max+2,node_a:nodi_esterni[i],node_b:String(nodi_interni[z]),weight_edge:costo[z],modify_date:"2022-07-31T15:40:00+01:00",FKuser_id:"Wos78BnB09"}).then((arr)=>{
         });
       } 
     }        
@@ -178,7 +179,7 @@ export function endGraph(req:any,res:any){
 export async function findGraph(id_graph: number, res: any): Promise< Map<string, Map<string, number>>>{
   let map2: Map<string, Map<string, number>> = new Map();
   let nodi_testa= new Set;
-  await Graph.findAll({attributes: ['node_a', 'node_b', 'weight_edge'], where: {id_graph: id_graph}}).then(arr => {
+  await Edge.findAll({attributes: ['node_a', 'node_b', 'weight_edge'], where: {id_graph: id_graph}}).then(arr => {
     for ( let i = 0; i < arr.length; i++){
       nodi_testa.add(arr[i].getDataValue("node_a"));
     }
