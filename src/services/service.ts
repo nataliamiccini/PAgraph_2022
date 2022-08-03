@@ -13,15 +13,12 @@ export function showAllGraph(req: any, res: any) {
   });
 };
 
-<<<<<<< Updated upstream
 export function test(id_graph:number, res:any){
   let elem=[];
   Graph.findAll({attributes: ['node_a'], where:{id_graph: id_graph}}).then( arr => {
       res.json(arr);
   });
 }
-
-=======
 
 export  async function nodi(req:number,res:any){
     let elem=[];
@@ -101,7 +98,6 @@ export function filterGraph(num_nodi:number,num_archi:number,res:any){
 }*/
 
 
->>>>>>> Stashed changes
 let max=0;
 export function createGraph(req:any,res:any){
   let costo=[];
@@ -167,8 +163,8 @@ export function createGraph(req:any,res:any){
     }        
   }
   tot_e.add(nodi_esterni)
-  n_esterni=tot_e.size;
-  return tot=0.25*n_esterni+ 0.01*n_archi;
+  n_esterni = tot_e.size;
+  return tot = 0.25*n_esterni + 0.01*n_archi;
 }; 
 
 export function endGraph(req:any,res:any){
@@ -206,4 +202,36 @@ export async function path(req: number, node_a: string, node_b: string, res: any
     ar = route.path(node_a, node_b, {cost: true})
   })
  return ar
+};
+
+export async function n_nodi(req: any, res: any): Promise<number>{
+  let tot_node = new Set
+  await Graph.findAll({where: {id_graph: req}}).then(arr => {
+    for (let i in arr){
+    tot_node.add(arr[i].getDataValue("node_a"))
+    tot_node.add(arr[i].getDataValue("node_a"))
+    }
+  })
+  //const array = Array.from(tot_node);
+  return tot_node.size
+};
+
+export async function n_edge(req: any, res: any): Promise<number>{
+  let tot_edge = new Set
+  await Graph.findAll({where: {id_graph: req}}).then(arr => {
+    for (let i in arr){
+    tot_edge.add(arr[i].getDataValue("id_edge"))
+    }
+  })
+  //const array = Array.from(tot_edge);
+  return tot_edge.size
+};
+
+export async function cost(req: any, res: any): Promise<number>{
+  let tot_edge = new Set
+  let cost: number
+  await Promise.all([n_nodi(req, res), n_edge(req, res)]).then(result => {
+    cost = (result[0]*0.25 + result[1]*0.01)
+  }) 
+  return cost
 };
