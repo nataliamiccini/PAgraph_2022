@@ -58,32 +58,67 @@ export async function WeightOfNodes(id_edge: string):Promise<any>{
    } )
 return a;
 }*/
+export async function findMax():Promise<any>{
+  let result=await sequelize.query(
+    "SELECT MAX(versions) as max1 FROM edge",
+    {
+    type:QueryTypes.SELECT}
+) 
+let c=(Object.values(result))
+return (c.map(item=>(item as any).max1))
+}
 
 export async function updateWeight(new_weight: number, id_edge:any, res:any){
   let alpha=0.8;
   let keys;
-id_edge.forEach(
-  function(x){
-  Edge.findAll({attributes: ['weight_edge'], where:{ id_edge: x}}).then(arr=>{
-   console.log(arr);
-   keys =Object.values(arr);
+let version;
+let graphID
+let c;
+let d;
+let m=Number(await findMax())
 
-   for(let i=0; i<keys.length;i++){ 
+  id_edge.forEach(
+  async function(x){
 
-      keys[i].weight_edge=alpha*keys[i].weight_edge+(1-alpha)*new_weight;
+    version= await sequelize.query(
+    "SELECT versions  FROM edge where id_edge="+"'"+x+"'",
+    {raw:true,
+    type:QueryTypes.SELECT}) 
 
-      const result= sequelize.query(
-            "UPDATE graph SET weight_edge="+keys[i].weight_edge+" WHERE id_edge="+"'"+x+"'",
-            {raw:true,
-            type:QueryTypes.RAW}
-          ).then(arr2=>{
-            res.json("Il peso dell'arco è stato aggiornato")
-            
-          });
-      }
- });
-});
+    c=(Object.values(version));
+
+      graphID=await sequelize.query(
+        "SELECT FKid_graph  FROM edge where id_edge="+"'"+x+"'",
+        {raw:true,
+        type:QueryTypes.SELECT}) 
+    
+    d=(Object.values(graphID));
+
+    //trovo tutti i campi della tabella edge che hanno versione e id del grafo di quello nel body
+    Edge.findAll({ where:{versions:(c.map(item=>(item as any).versions)),FKid_graph:(d.map(item=>(item as any).FKid_graph))}} ).then(arr2=>{
+    m+=1;
+    //prendo i valori dell'array di elementi
+    keys =Object.values(arr2);
+    //prendo ogni elemento dell'array
+    for(let i=0; i<keys.length;i++){ 
+
+      let ID = Math.random().toString(36);
+
+      if(keys[i].id_edge===x) {     
+      Edge.create({id_edge:ID, node_a:keys[i].node_a, node_b:keys[i].node_b,versions:m, weight_edge:alpha*keys[i].weight_edge+(1-alpha)*new_weight,modify_date:"2022-07-31T15:40:00+01:00",FKuser_id:keys[i].FKuser_id,FKid_graph:keys[i].FKid_graph})
+      
+    }else {
+      Edge.create({id_edge:ID, node_a:keys[i].node_a, node_b:keys[i].node_b,versions:m, weight_edge:keys[i].weight_edge,modify_date:"2022-07-31T15:40:00+01:00",FKuser_id:keys[i].FKuser_id,FKid_graph:keys[i].FKid_graph})
+    }
+    
+  }
+     
+  });
+  });
+ res.json("Il grafo è stato aggiornato")
 }
+
+
 export function filterGraph(num_nodi:number,num_archi:number,res:any){
 
 }

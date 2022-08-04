@@ -17,12 +17,12 @@ export const Graph = sequelize.define('graph', {
         type: DataTypes.INTEGER,
         primaryKey: true
     },
-    node_a: {
-        type: DataTypes.STRING(100),
+    tot_node: {
+        type: DataTypes.INTEGER,
         allowNull: false
     },
-    node_b: {
-        type: DataTypes.STRING(100),
+    tot_edge: {
+        type: DataTypes.INTEGER,
         allowNull: false
     }
 }, {
