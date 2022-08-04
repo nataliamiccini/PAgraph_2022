@@ -24,6 +24,10 @@ export const Graph = sequelize.define('graph', {
     tot_edge: {
         type: DataTypes.INTEGER,
         allowNull: false
+    },
+    cost: {
+        type: DataTypes.DECIMAL,
+        allowNull: false
     }
 }, {
     modelName: 'grah',
