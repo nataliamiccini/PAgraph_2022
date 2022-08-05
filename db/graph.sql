@@ -21,7 +21,8 @@ CREATE TABLE user (
 CREATE TABLE graph (
   id_graph int(11) NOT NULL,
   tot_node int(11) NOT NULL,
-  tot_edge int(11) NOT NULL
+  tot_edge int(11) NOT NULL,
+  cost DECIMAL(6,5) NOT NULL
 );
 
 ALTER TABLE edge
@@ -43,8 +44,8 @@ INSERT INTO user (id_user,email, name, surname,  role, token) VALUES
   ('nzRH41T5sz', 'natalia@gmail.com', 'Natalia', 'Miccini', 'admin', 100);
 
   
-INSERT INTO graph (id_graph, tot_node, tot_edge) VALUES
-  (1, 5, 10);
+INSERT INTO graph (id_graph, tot_node, tot_edge, cost) VALUES
+  (1, 5, 10, 1.35);
 
 INSERT INTO edge (id_edge, node_a, node_b, versions, weight_edge, modify_date, FKuser_id, FKid_graph) VALUES
   ('0.a16l7ifc5q', 'A', 'B', 1, 3, '2022-07-31T15:40:00+01:00', "T06x323aWb", 1),

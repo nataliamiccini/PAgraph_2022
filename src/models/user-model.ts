@@ -13,7 +13,7 @@ import { DataTypes, Model, Sequelize } from 'sequelize';
  */ 
  
  export const User = sequelize.define('user', {
-     user_id: {
+     id_user: {
          type: DataTypes.INTEGER,
          primaryKey: true
      },

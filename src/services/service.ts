@@ -21,16 +21,16 @@ export function test(id_graph:number, res:any){
   Edge.findAll({attributes: ['node_a'], where:{id_graph: id_graph}}).then( arr => {
       res.json(arr);
   });
-}
+};
 
 export  async function nodi(req:number,res:any){
-    let elem=[];
-   await Edge.findAll({attributes: ['weight_edge'],where:{id_graph: req}}).then(arr=>{
-        //res.json(arr);
-        elem=arr
-        console.log(arr);
-    });
-    return elem;
+  let elem=[];
+  await Edge.findAll({attributes: ['weight_edge'],where:{id_graph: req}}).then(arr=>{
+    //res.json(arr);
+    elem=arr
+    console.log(arr);
+  });
+  return elem;
 }
 
 export async function WeightOfNodes(id_edge: string):Promise<any>{
@@ -206,17 +206,17 @@ export function createGraph(req:any,res:any){
 }; 
 
 export function endGraph(req:any,res:any){
-  let x= createGraph(req,res)
+  let x = createGraph(req,res)
   console.log("totale costo "+x)
   User.decrement({token:x},{where:{id_user:"Wos78BnB09"}}).then(arr=>{
     res.json("Hai pagato un totale di  "+ x + "token")
   });
 }
 
-export async function findGraph(id_graph: number, res: any): Promise< Map<string, Map<string, number>>>{
+export async function findGraph(id_graph: number, versions: number, res: any): Promise< Map<string, Map<string, number>>>{
   let map2: Map<string, Map<string, number>> = new Map();
   let nodi_testa= new Set;
-  await Edge.findAll({attributes: ['node_a', 'node_b', 'weight_edge'], where: {id_graph: id_graph}}).then(arr => {
+  await Edge.findAll({attributes: ['node_a', 'node_b', 'weight_edge'], where: {FKid_graph: id_graph, versions: versions}}).then(arr => {
     for ( let i = 0; i < arr.length; i++){
       nodi_testa.add(arr[i].getDataValue("node_a"));
     }
@@ -230,15 +230,32 @@ export async function findGraph(id_graph: number, res: any): Promise< Map<string
       }
     })
   });
+  console.log(map2)
   return map2
 };
 
-export async function path(req: number, node_a: string, node_b: string, res: any): Promise<Array<any>>{
+export async function path(id_graph: number, node_a: string, node_b: string, user_id: string, res: any): Promise<Array<any>>{
+  var start = new Date().getTime();
   let ar = []
-  await findGraph(req, res).then( arr => {
+  const v = await Max(id_graph)
+  await findGraph(id_graph, v, res).then( arr => {
     const route = new Graph1(arr)
-    ar = route.path(node_a, node_b, {cost: true})
+    ar.push(route.path(node_a, node_b, {cost: true}))
   })
+  var end = new Date().getTime();
+  ar.push({"timestamp" : String(Number(end - start) + " ms")})
+ return ar 
+};
+
+export async function pathV(id_graph: number, versions: number, node_a: string, node_b: string, user_id: string, res: any): Promise<Array<any>>{
+  var start = new Date().getTime();
+  let ar = []
+  await findGraph(id_graph, versions, res).then( arr => {
+    const route = new Graph1(arr)
+    ar.push(route.path(node_a, node_b, {cost: true}))
+  })
+  var end = new Date().getTime();
+  ar.push({"timestamp" : String(Number(end - start) + " ms")})
  return ar
 };
 
@@ -273,3 +290,34 @@ export async function cost(req: any, res: any): Promise<number>{
   }) 
   return cost
 };
+
+export async function checkToken ( user_id: string, id_graph: number, s: number, res: any): Promise<boolean> {
+  let result: any
+  let t = await User.findAll({where: {id_user: user_id}, attributes: ["token"]})
+  let c = await Graph.findAll({where: {id_graph: id_graph}, attributes: ["cost"]})
+  
+    if (t[0].getDataValue("token")>c[0].getDataValue("cost")){
+      result=true;
+    }
+    else {
+      result = false;
+    }
+  return result;
+};
+
+async function Max (id_graph: number): Promise<number>{
+  const result = await sequelize.query(
+    "SELECT MAX(versions) as max1 FROM edge",
+    {
+      type: QueryTypes.SELECT
+    }
+  )
+  const c = (Object.values(result))
+  return Number(c.map(item => (item as any).max1)) 
+}
+
+export async function decreaseToken(user_id: string, costo: number, res:any){
+  await User.decrement({token: costo}, {where: {user_id: user_id}}).then( arr => {
+    res.json("Hai pagato un totale di  "+ costo + "token")
+  })
+}
