@@ -91,4 +91,10 @@ app.get('/path-v', async function(req: any, res: any) {
   })
 });
 
+app.get('/filter', async function(req: any, res: any) {    
+  await Service.filterGraph(req.body.num_nodi, req.body.num_archi, res).then( result => {
+    res.json(result)
+  })
+});
+
 app.listen(8080 ,()=> console.log("Listening on port 8080"))

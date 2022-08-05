@@ -3,6 +3,7 @@ import { Edge } from '../models/edge-model';
 import { Graph } from '../models/graph-models';
 import { Model, Sequelize, where, QueryTypes } from 'sequelize';
 import { Singleton } from '../connection/Singleton';
+import 'mocha';
 
 const Graph1 = require('node-dijkstra')
 const sequelize: Sequelize = Singleton.getConnection();
@@ -120,20 +121,31 @@ let m=Number(await findMax())
  res.json("Il grafo è stato aggiornato")
 }
 
-
-export function filterGraph(num_nodi:number,num_archi:number,res:any){
-
+/**
+ * 
+ * @param {Object} [option]
+ * @param num_archi 
+ * @param res 
+ * 
+ * @param {number} [option.num_nodi]
+ * @param {number} [option.num_archi]
+ */
+export async function filterGraph (num_nodi: number, num_archi: number, res: any): Promise<Array<any>>{
+    let ar = []
+    if( num_nodi && !num_archi){
+      const a = await Graph.findAll({attributes: ["id_graph", "tot_edge"], where: {tot_node: num_nodi}})
+      ar.push(a)
+    }
+    else if (num_archi && !num_nodi){
+      const b = await Graph.findAll({attributes: ["id_graph","tot_node"], where: {tot_edge: num_archi}})
+      ar.push(b)
+    }
+    else if (num_nodi && num_archi){
+      const c = await Graph.findAll({attributes: ["id_graph"], where: {tot_node: num_nodi, tot_edge: num_archi}})
+      ar.push(c)
+    }
+    return ar
 }
-/*export function findMAX(){
-  sequelize.query(
-    "SELECT MAX(id_graph) as max FROM graph",
-    {raw:true,
-      type:QueryTypes.SELECT}
-  ).then(arr=>{
-    console.log(arr.map(item=>(item as any).max)[0])
-    arr.map(item=>(item as any).max)[0];
-  })
-}*/
 
 
 let max=0;
@@ -224,7 +236,7 @@ export async function findGraph(id_graph: number, versions: number, res: any): P
       let map3: Map<string, number> = new Map();
       for (let i = 0; i < arr.length; i++){
         if (arr[i].getDataValue("node_a") === x){
-          map3.set(arr[i].getDataValue("node_b"), arr[i].getDataValue("weight_edge"))
+          map3.set(arr[i].getDataValue("node_b"), Number(arr[i].getDataValue("weight_edge")))
           map2.set(arr[i].getDataValue("node_a"), map3)
         }
       }
