@@ -7,7 +7,7 @@ import { forEachTrailingCommentRange } from 'typescript';
 const app = express();
 
 app.use(express.json());
-let id=[];
+
 let map= new MapValue<Req<number,string[],string>>();
 
 app.get('/RequestUpdate', function(req: any, res: any) {  
@@ -16,10 +16,7 @@ app.get('/RequestUpdate', function(req: any, res: any) {
   .toString(16)
   .substring(1);
 
-  //x.SetValue(map.Lenght()+1,req.body.new_weight, req.body.id_edge);
   x.SetValue(s4 ,req.body.new_weight, req.body.id_edge);
-  //id.push(map.Lenght())
-  console.log(id)
   map.pushI(x);
 
   res.json("la richiesta è stata aggiunta");
@@ -44,12 +41,12 @@ app.get('/rejectReq', function(req: any, res: any) {
     if (y.hasOwnProperty(key)) {
       let z=y[key];
       let l = z[0];
-      if(l["request_id"]===req.body.id){
+      if(l["request_id"]===req.body.request_id){
         map.pop();
-        res.json("é stata eliminata la richiesta: "+req.body.id);
+        res.json("é stata eliminata la richiesta: "+req.body.request_id);
         }
         else{
-          res.json("Id "+req.body.id+ " non valido");
+          res.json("Id "+req.body.request_id+ " non valido");
         }
     }
   }
@@ -57,7 +54,29 @@ app.get('/rejectReq', function(req: any, res: any) {
 
 
 app.get('/update', function(req: any, res: any) {    
-    Service.updateWeight(req.body.new_weight, req.body.id_edge, res);
+
+  let x = JSON.stringify(map)
+  let y = JSON.parse(x)
+
+  for (let key in y) {
+    if (y.hasOwnProperty(key)) {
+      let z=y[key];
+      let l = z[0];
+      
+      if(l["request_id"]===req.body.request_id){
+            
+            Service.updateWeight(l.weight, l.edge_id, res);
+            map.pop();
+            res.json("é stata accettata la richiesta: "+req.body.request_id);
+            
+        }
+        else{
+          res.json("Id "+req.body.request_id+ " non valido");
+        }
+        
+    }
+  }
+    
     
 });
 

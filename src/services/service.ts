@@ -117,7 +117,7 @@ let m=Number(await findMax())
      
   });
   });
- res.json("Il grafo è stato aggiornato")
+ 
 }
 
 
