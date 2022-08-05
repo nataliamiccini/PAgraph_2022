@@ -1,14 +1,60 @@
 import * as express from 'express';
 const Graph = require('node-dijkstra')
 import * as Service from './services/service'
-
+import {Req} from './services/request'
+import {MapValue} from './services/map'
+import { forEachTrailingCommentRange } from 'typescript';
 const app = express();
 
 app.use(express.json());
+let id=[];
+let map= new MapValue<Req<number,string[],string>>();
+
+app.get('/RequestUpdate', function(req: any, res: any) {  
+  let x = new Req<number,string[],string>();
+  let s4 = Math.floor((1 + Math.random()) * 0x10000)
+  .toString(16)
+  .substring(1);
+
+  //x.SetValue(map.Lenght()+1,req.body.new_weight, req.body.id_edge);
+  x.SetValue(s4 ,req.body.new_weight, req.body.id_edge);
+  //id.push(map.Lenght())
+  console.log(id)
+  map.pushI(x);
+
+  res.json("la richiesta è stata aggiunta");
+});
+
+
+app.get('/ShowRequest', function(req: any, res: any) {    
+  res.json(map);
+});
+
 
 app.get('/all', function(req: any, res: any) {    
-    Service.showAllGraph( req, res);
+  Service.showAllGraph( req, res);
 });
+
+app.get('/rejectReq', function(req: any, res: any) { 
+
+  let x = JSON.stringify(map)
+  let y = JSON.parse(x)
+
+  for (let key in y) {
+    if (y.hasOwnProperty(key)) {
+      let z=y[key];
+      let l = z[0];
+      if(l["request_id"]===req.body.id){
+        map.pop();
+        res.json("é stata eliminata la richiesta: "+req.body.id);
+        }
+        else{
+          res.json("Id "+req.body.id+ " non valido");
+        }
+    }
+  }
+});
+
 
 app.get('/update', function(req: any, res: any) {    
     Service.updateWeight(req.body.new_weight, req.body.id_edge, res);

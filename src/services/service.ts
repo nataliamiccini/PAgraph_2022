@@ -7,6 +7,8 @@ import { Singleton } from '../connection/Singleton';
 const Graph1 = require('node-dijkstra')
 const sequelize: Sequelize = Singleton.getConnection();
 
+
+
 export function showAllGraph(req: any, res: any) {
   Edge.findAll({}).then(arr=>{
       console.log(arr);
