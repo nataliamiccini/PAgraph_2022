@@ -3,7 +3,7 @@ import { Edge } from '../models/edge-model';
 import { Graph } from '../models/graph-models';
 import { Model, Sequelize, where, QueryTypes } from 'sequelize';
 import { Singleton } from '../connection/Singleton';
-import 'mocha';
+
 
 const Graph1 = require('node-dijkstra')
 const sequelize: Sequelize = Singleton.getConnection();
@@ -333,3 +333,6 @@ export async function decreaseToken(user_id: string, costo: number, res:any){
     res.json("Hai pagato un totale di  "+ costo + "token")
   })
 }
+
+
+//prendo in ingresso id_grafo, versione , arco, va

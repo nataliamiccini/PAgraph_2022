@@ -32,6 +32,12 @@ app.get('/all', function(req: any, res: any) {
   Service.showAllGraph( req, res);
 });
 
+app.get('/i',function(req: any, res: any) {    
+  map.Neleme()
+});
+
+
+
 app.get('/rejectReq', function(req: any, res: any) { 
 
   let x = JSON.stringify(map)
@@ -40,43 +46,38 @@ app.get('/rejectReq', function(req: any, res: any) {
   for (let key in y) {
     if (y.hasOwnProperty(key)) {
       let z=y[key];
-      let l = z[0];
-      if(l["request_id"]===req.body.request_id){
-        map.pop();
-        res.json("é stata eliminata la richiesta: "+req.body.request_id);
-        }
-        else{
-          res.json("Id "+req.body.request_id+ " non valido");
-        }
+      let l=Object.values(z)
+      l.forEach(function(x){
+       if (x["request_id"]===req.body.request_id) 
+        {res.json("é stata eliminata la richiesta: "+req.body.request_id)
+        let index= l.indexOf(x)
+        map.pop(index)}
+            
+      })
     }
   }
 });
 
 
 app.get('/update', function(req: any, res: any) {    
-
   let x = JSON.stringify(map)
   let y = JSON.parse(x)
 
   for (let key in y) {
     if (y.hasOwnProperty(key)) {
       let z=y[key];
-      let l = z[0];
-      
-      if(l["request_id"]===req.body.request_id){
+      let l=Object.values(z)
+      l.forEach(function(x){
+       if (x["request_id"]===req.body.request_id) 
+        {res.json("é stata accettata la richiesta: "+req.body.request_id);
+        Service.updateWeight(x["weight"], x["edge_id"], res);
+        let index= l.indexOf(x);
+        map.pop(index);
+      }
             
-            Service.updateWeight(l.weight, l.edge_id, res);
-            map.pop();
-            res.json("é stata accettata la richiesta: "+req.body.request_id);
-            
-        }
-        else{
-          res.json("Id "+req.body.request_id+ " non valido");
-        }
-        
+      })
     }
   }
-    
     
 });
 

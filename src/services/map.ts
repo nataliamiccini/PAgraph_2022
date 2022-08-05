@@ -18,8 +18,26 @@ export class MapValue<T>{
         this.requests.push(item);
     }
 
-    pop(){
-        return this.requests.pop();
+    pop(index : number){
+        //return this.requests.pop();
+        this.requests.splice(index,1);
+    }
+
+    IndexOf(item:T){
+        return this.requests.indexOf(item);
+    }
+
+    Some(req:any) {
+        return this.requests.some(code => JSON.stringify(code) === JSON.stringify({ request_id: req }));
+    }
+
+    Neleme(){
+       this.requests.forEach(
+        function(x){
+            //console.log(this.requests.indexOf(x))
+            console.log(1)
+        }
+       )
     }
 
 
