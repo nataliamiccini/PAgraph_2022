@@ -10,13 +10,20 @@ const sequelize: Sequelize = Singleton.getConnection();
 
 
 export async function ModelList(date:Date,id_edge:string,res:any):Promise<Array<any>>{
-
+let a=[];
 let id;
 let mapModel: Map<number, number[] > = new Map();
 if(!date && !id_edge){
-  const a = await Edge.findAll({attributes:["FKid_graph","versions"]});
+  a = await Edge.findAll({attributes:["FKid_graph","versions"]});
 
-      for(let k =0; k<a.length;k++){
+  }else if(!date&& id_edge){
+    a = await Edge.findAll({attributes:["FKid_graph","versions"],where:{id_edge:id_edge} });
+
+  }else if(!id_edge && date){
+    a = await Edge.findAll({attributes:["FKid_graph","versions"], where:{modify_date:date}});
+  }
+
+    for(let k =0; k<a.length;k++){
 
       id= a[k].getDataValue("FKid_graph");
       let result = [];
@@ -26,12 +33,11 @@ if(!date && !id_edge){
       for (let v=0; v<b.length; v++){
               result.push({
                 version:b[v].getDataValue("versions")
-              });
+                });
               }
             mapModel.set(id, result);
-
     }
-  }
+
   return (Array.from(mapModel));
 }
 
