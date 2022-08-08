@@ -9,6 +9,31 @@ const Graph1 = require('node-dijkstra')
 const sequelize: Sequelize = Singleton.getConnection();
 
 
+export async function ModelList(date:Date,id_edge:string,res:any):Promise<Array<any>>{
+
+let id;
+let mapModel: Map<number, number[] > = new Map();
+if(!date && !id_edge){
+  const a = await Edge.findAll({attributes:["FKid_graph","versions"]});
+
+      for(let k =0; k<a.length;k++){
+
+      id= a[k].getDataValue("FKid_graph");
+      let result = [];
+
+      const b= await Edge.findAll({attributes:["versions"], group: ['versions'],where:{FKid_graph:id}});
+
+      for (let v=0; v<b.length; v++){
+              result.push({
+                version:b[v].getDataValue("versions")
+              });
+              }
+            mapModel.set(id, result);
+
+    }
+  }
+  return (Array.from(mapModel));
+}
 
 export function showAllGraph(req: any, res: any) {
   Edge.findAll({}).then(arr=>{

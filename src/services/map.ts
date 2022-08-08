@@ -27,18 +27,6 @@ export class MapValue<T>{
         return this.requests.indexOf(item);
     }
 
-    Some(req:any) {
-        return this.requests.some(code => JSON.stringify(code) === JSON.stringify({ request_id: req }));
-    }
-
-    Neleme(){
-       this.requests.forEach(
-        function(x){
-            //console.log(this.requests.indexOf(x))
-            console.log(1)
-        }
-       )
-    }
 
 
 }

@@ -32,26 +32,22 @@ app.get('/all', function(req: any, res: any) {
   Service.showAllGraph( req, res);
 });
 
-app.get('/i',function(req: any, res: any) {    
-  map.Neleme()
-});
-
 
 
 app.get('/rejectReq', function(req: any, res: any) { 
 
-  let x = JSON.stringify(map)
-  let y = JSON.parse(x)
+  let x = JSON.stringify(map);
+  let y = JSON.parse(x);
 
   for (let key in y) {
     if (y.hasOwnProperty(key)) {
       let z=y[key];
-      let l=Object.values(z)
+      let l=Object.values(z);
       l.forEach(function(x){
        if (x["request_id"]===req.body.request_id) 
-        {res.json("é stata eliminata la richiesta: "+req.body.request_id)
-        let index= l.indexOf(x)
-        map.pop(index)}
+        {res.json("é stata eliminata la richiesta: "+req.body.request_id);
+        let index= l.indexOf(x);
+        map.pop(index);}
             
       })
     }
@@ -60,13 +56,13 @@ app.get('/rejectReq', function(req: any, res: any) {
 
 
 app.get('/update', function(req: any, res: any) {    
-  let x = JSON.stringify(map)
-  let y = JSON.parse(x)
+  let x = JSON.stringify(map);
+  let y = JSON.parse(x);
 
   for (let key in y) {
     if (y.hasOwnProperty(key)) {
       let z=y[key];
-      let l=Object.values(z)
+      let l=Object.values(z);
       l.forEach(function(x){
        if (x["request_id"]===req.body.request_id) 
         {res.json("é stata accettata la richiesta: "+req.body.request_id);
@@ -81,6 +77,12 @@ app.get('/update', function(req: any, res: any) {
     
 });
 
+app.get('/modelList', function(req: any, res: any) {    
+  Service.ModelList(req.body.date,req.body.id_edge, res).then( result => {
+    res.json(result)
+  })
+  
+});
 app.get('/nodi', function(req: any, res: any) {    
     Service.nodi(req.body.id_edge, res);
     

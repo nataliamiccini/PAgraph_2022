@@ -19,4 +19,7 @@ export class Req <T,U,Z>{
         console.log(`Id=${this.request_id},Peso = ${this.weight}, Id_arco = ${this.edge_id}`);
     }
 
+
+
+
 }
