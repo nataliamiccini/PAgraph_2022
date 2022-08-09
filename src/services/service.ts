@@ -303,14 +303,14 @@ console.log("max: ",max++)
    idGraph=max++;
    return idGraph
 
-}
+};
 
 export async function createTableGraph(req:any,FKuser_id:any,res:any){
 let idGraph=await MaxidGraph()
 Graph.create({id_graph:idGraph, tot_node:0 ,tot_edge:0, cost:0})
 
 createGraph(req,FKuser_id,idGraph,res);
-}
+};
 
 /*export function endGraph(req:any,FKuser_id:any,res:any){
 
@@ -379,6 +379,7 @@ export async function n_nodi(req: any, res: any): Promise<number>{
   console.log(tot_node)
   return tot_node.size
 };
+
 export  function n_edge1(FKid_graph: any, res:any){
  
   /*let count =  sequelize.query(
@@ -391,9 +392,9 @@ export  function n_edge1(FKid_graph: any, res:any){
   let tot_edge= (Max.map(item=>(item as any).num));
   console.log(tot_edge)
 
-  return tot_edge*/
-  
-}
+  return tot_edge*/ 
+};
+
 export async function n_edge(FKid_graph: any, res:any): Promise<number>{
   let tot_edge = new Set
   await Edge.findAll({where: {FKid_graph: FKid_graph}}).then(arr => {
@@ -438,12 +439,16 @@ async function Max (id_graph: number): Promise<number>{
   )
   const c = (Object.values(result))
   return Number(c.map(item => (item as any).max1)) 
-}
+};
 
 export async function decreaseToken(user_id: string, costo: number, res:any){
   await User.decrement({token: costo}, {where: {user_id: user_id}}).then( arr => {
     res.json("Hai pagato un totale di  "+ costo + "token")
   })
-}
+};
 
-//prendo in ingresso id_grafo, versione , arco, va
+export async function chargingAdmin ( user_id: string, user: string, token: number, res: any ): Promise<any>{
+  await User.increment({token: token}, {where: {id_user: user}}).then(arr => {
+      res.json({"Effettuata ricarica di token": token});
+  });
+};
