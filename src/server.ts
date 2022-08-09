@@ -124,8 +124,14 @@ app.get('/filter', async function(req: any, res: any) {
   })
 });
 
-app.post('charging', async function(req: any, res: any){
+app.post('/charging', async function(req: any, res: any){
   await Service.chargingAdmin(req.body.user_id, req.body.user, req.body.token, res)
+});
+
+app.get('/sim', async function(req: any, res: any) {    
+  await Service.simulation(req.body.id_edge, req.body.start, req.body.end, req.body.increment, req.body.node_a, req.body.node_b, res).then( result => {
+    res.json(result)
+  })
 });
 
 app.listen(8080 ,()=> console.log("Listening on port 8080"))

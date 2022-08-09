@@ -321,8 +321,8 @@ createGraph(req,FKuser_id,idGraph,res);
   });
 }*/
 
-export async function findGraph(id_graph: number, versions: number, res: any): Promise< Map<string, Map<string, number>>>{
-  let map2: Map<string, Map<string, number>> = new Map();
+export async function findGraph(id_graph: number, versions: number, res: any): Promise< Map<string, Object>>{
+  let map2: Map<string, Object> = new Map();
   let nodi_testa= new Set;
   await Edge.findAll({attributes: ['node_a', 'node_b', 'weight_edge'], where: {FKid_graph: id_graph, versions: versions}}).then(arr => {
     for ( let i = 0; i < arr.length; i++){
@@ -333,12 +333,11 @@ export async function findGraph(id_graph: number, versions: number, res: any): P
       for (let i = 0; i < arr.length; i++){
         if (arr[i].getDataValue("node_a") === x){
           map3.set(arr[i].getDataValue("node_b"), Number(arr[i].getDataValue("weight_edge")))
-          map2.set(arr[i].getDataValue("node_a"), map3)
+          map2.set(arr[i].getDataValue("node_a"), Object.fromEntries(map3))
         }
       }
     })
   });
-  console.log(map2)
   return map2
 };
 
@@ -347,7 +346,7 @@ export async function path(id_graph: number, node_a: string, node_b: string, use
   let ar = []
   const v = await Max(id_graph)
   await findGraph(id_graph, v, res).then( arr => {
-    const route = new Graph1(arr)
+    const route = new Graph1(Object.fromEntries(arr))
     ar.push(route.path(node_a, node_b, {cost: true}))
   })
   var end = new Date().getTime();
@@ -359,7 +358,7 @@ export async function pathV(id_graph: number, versions: number, node_a: string, 
   var start = new Date().getTime();
   let ar = []
   await findGraph(id_graph, versions, res).then( arr => {
-    const route = new Graph1(arr)
+    const route = new Graph1(Object.fromEntries(arr))
     ar.push(route.path(node_a, node_b, {cost: true}))
   })
   var end = new Date().getTime();
@@ -432,7 +431,7 @@ export async function checkToken ( user_id: string, id_graph: number, s: number,
 
 async function Max (id_graph: number): Promise<number>{
   const result = await sequelize.query(
-    "SELECT MAX(versions) as max1 FROM edge",
+    "SELECT MAX(versions) as max1 FROM edge where FKid_graph" + id_graph,
     {
       type: QueryTypes.SELECT
     }
@@ -451,4 +450,31 @@ export async function chargingAdmin ( user_id: string, user: string, token: numb
   await User.increment({token: token}, {where: {id_user: user}}).then(arr => {
       res.json({"Effettuata ricarica di token": token});
   });
+};
+
+export async function simulation (id_edge: number, start: number, end: number, increment: number, node_a: string, node_b: string, res: any ): Promise<any>  {
+  const ar = await Edge.findAll({attributes: ["node_a", "node_b", "versions", "FKid_graph"], where: {id_edge: id_edge}})
+  let map = await findGraph(ar[0].getDataValue("FKid_graph"), ar[0].getDataValue("versions"), res)
+  let b = await map.get(ar[0].getDataValue("node_a"))
+  let arr =[]
+  let arrg = []
+  for (let i = Number(start); i <= Number(end); i+=Number(increment) ){ 
+    b[ar[0].getDataValue("node_b")] = i
+    let map1 = new Map(JSON.parse(JSON.stringify(Array.from(map))))
+    console.log(map1)
+    
+    arrg.push(map1)
+    
+    let route = new Graph1(Object.fromEntries(map1))
+    
+    arr.push(route.path(node_a, node_b, {cost: true}))
+  }
+  const min_cost = Math.min(...arr.map(o => o.cost))
+  arr.push({"The best result costs: ": min_cost})
+  
+  const index = arr.findIndex((co) => co.cost === min_cost);
+  arr.push({"The best result is obtained with the follow graph: ": Object.fromEntries(arrg[index])})
+  
+return arr
+
 };
