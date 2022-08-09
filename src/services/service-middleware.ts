@@ -3,9 +3,17 @@ import { Edge } from '../models/edge-model';
 import { Graph } from '../models/graph-models';
 import { Sequelize} from 'sequelize';
 import { Singleton } from '../connection/Singleton';
+import { isNamedExportBindings } from 'typescript';
 
 const sequelize: Sequelize = Singleton.getConnection();
 
+export async function checkCrator ( FKuser_id: string, res: any): Promise<boolean> {
+    let result: any
+    await User.findAll({attributes: ["id_user"], where: {id_user: FKuser_id}}).then( arr => {
+    result= arr
+    })
+    return result;
+}
 /**
  * Funzione checkUserExistance
  * 
@@ -32,7 +40,7 @@ const sequelize: Sequelize = Singleton.getConnection();
  * @param res risposta da parte del sistema
  * @returns 
  */
- export async function checkGraphExistance ( id_graph: string, res: any): Promise<boolean> {
+ export async function checkGraphExistance ( id_graph: number, res: any): Promise<boolean> {
     let result: any
     result =false
     await Graph.findByPk(id_graph).then( arr => {
@@ -50,13 +58,20 @@ const sequelize: Sequelize = Singleton.getConnection();
  * @param res risposta da parte del sistema
  * @returns 
  */
- export async function checkEdgeExistance ( id_edge: string, res: any): Promise<boolean> {
+ export async function checkEdgeExistance ( id_edge: any, res: any): Promise<boolean> {
     let result: any
-    result =false
-    await Edge.findByPk(id_edge).then( arr => {
-        (this.lenght!=0)? result = true: result = false
-    });
-    return result;
+    result =[]
+    let x=0;
+    id_edge.forEach(
+      async  function(x){
+            await Edge.findByPk(x).then( arr => {
+                    if (this.lenght!=0) x++ 
+                });
+                
+        }
+    )
+    (x==id_edge.lenght)? result= true : result= false;
+ return result;
 };
 
 /**

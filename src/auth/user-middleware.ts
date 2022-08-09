@@ -7,6 +7,12 @@ function checkUserExistence(req: any, res: any, next: any) {
     });
 };
 
+function checkCreatorExistence(req: any, res: any, next: any) {
+    Service.checkCrator(req.body.FKuser_id, res).then((check) => {
+    (check ) ? next() : res.status(500).json({"error": "User not found"});
+    });
+};
+
 function checkGraphExistence(req: any, res: any, next: any) {
     Service.checkGraphExistance(req.body.id_graph, res).then((check) => {
     (check ) ? next() : res.status(500).json({"error": "Graph not found"});
@@ -44,5 +50,6 @@ export default {
     checkEdgeExistance,
     checkToken,
     checkUser,
+    checkCreatorExistence,
     checkAdmin
 };

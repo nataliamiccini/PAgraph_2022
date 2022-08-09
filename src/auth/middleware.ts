@@ -10,6 +10,24 @@ export const authjwt = [
     authJwt.errorHandler
 ];
 
+export const jwtReq=[
+    authJwt.checkHeader2,
+    authJwt.verifyKey,
+    authJwt.logErrors,
+    authJwt.errorHandler
+
+];
+
+export const Token = [
+    mid.checkToken
+];
+
+export const Graph=[
+    mid.checkUserExistence,
+    mid.checkGraphExistence,
+    authJwt.checkPayloadHeader
+];
+
 export const UserExistance = [
     mid.checkUserExistence
 ];
@@ -42,4 +60,8 @@ export const user = [
 
 export const admin = [
     mid.checkAdmin
+];
+
+export const creator = [
+    mid.checkCreatorExistence
 ];

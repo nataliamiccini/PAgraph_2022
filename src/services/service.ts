@@ -5,9 +5,23 @@ import { Model, Sequelize, where, QueryTypes } from 'sequelize';
 import { Singleton } from '../connection/Singleton';
 
 
-const Graph1 = require('node-dijkstra')
+const Graph1 = require('node-dijkstra');
 const sequelize: Sequelize = Singleton.getConnection();
 
+export async function VersionsList(date:Date,id_edge:string,FKid_graph:number,res:any){
+  let a;
+
+  if(!date && !id_edge){
+    a = await Edge.findAll({attributes:["versions"], where:{FKid_graph:FKid_graph}});
+  
+    }else if(!date&& id_edge){
+      a = await Edge.findAll({attributes:["versions"],where:{id_edge:id_edge, FKid_graph:FKid_graph} });
+  
+    }else if(!id_edge && date){
+      a = await Edge.findAll({attributes:["versions"], where:{modify_date:date, FKid_graph:FKid_graph}});
+    }
+  return a;
+  }
 
 export async function ModelList(date:Date,id_edge:string,res:any):Promise<Array<any>>{
 let a=[];
@@ -415,19 +429,7 @@ export async function cost(req: any, res: any): Promise<number>{
   return cost
 };
 
-export async function checkToken ( user_id: string, id_graph: number, s: number, res: any): Promise<boolean> {
-  let result: any
-  let t = await User.findAll({where: {id_user: user_id}, attributes: ["token"]})
-  let c = await Graph.findAll({where: {id_graph: id_graph}, attributes: ["cost"]})
-  
-    if (t[0].getDataValue("token")>c[0].getDataValue("cost")){
-      result=true;
-    }
-    else {
-      result = false;
-    }
-  return result;
-};
+
 
 async function Max (id_graph: number): Promise<number>{
   const result = await sequelize.query(
@@ -445,5 +447,3 @@ export async function decreaseToken(user_id: string, costo: number, res:any){
     res.json("Hai pagato un totale di  "+ costo + "token")
   })
 }
-
-//prendo in ingresso id_grafo, versione , arco, va

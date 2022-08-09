@@ -1,21 +1,27 @@
 import * as jwt from "jsonwebtoken";
 import logger from "jet-logger";
 import { NextFunction, Request, Response } from "express";
+import * as Server from '../server'
 
 /**
- * Funzione checkHeader 
+ * Funzione checkToken
  * 
- * Verifica che la richiesta contenga un Header
+ * Verifica che sia presente un token jwt nella richiesta
  * 
  * @param req richiesta da parte dell'utente
  * @param res risposta da parte del sistema
  * @param next riferimento al middleware successivo
  */
-function checkHeader(req: any, res: Response, next: NextFunction) {
-    const authHeader = req.headers.authorization;
-    (authHeader) ? next(): res.status(403).json({"error": "No authorization header"});
-};
-
+ function checkToken(req: any, res: Response, next: NextFunction) {
+    const bearerHeader = req.headers.authorization;
+    if( bearerHeader?.toLowerCase().startsWith("bearer ") ){
+        const bearerToken = bearerHeader.split(' ')[1];
+        req.token=bearerToken;
+        next();
+     } else {
+        res.status(403).json({"error": "No token provided"});
+     }
+  }
 /**
  * Funzione checkPayloadHeader
  * 
@@ -30,24 +36,50 @@ function checkHeader(req: any, res: Response, next: NextFunction) {
 }
 
 /**
- * Funzione checkToken
+ * Funzione logErrors
  * 
- * Verifica che sia presente un token jwt nella richiesta
+ * Stampa l'errore
  * 
  * @param req richiesta da parte dell'utente
  * @param res risposta da parte del sistema
  * @param next riferimento al middleware successivo
  */
-function checkToken(req: any, res: Response, next: NextFunction) {
-  const bearerHeader = req.headers.authorization;
-  if( bearerHeader?.toLowerCase().startsWith("bearer ") ){
-      const bearerToken = bearerHeader.split(' ')[1];
-      req.token=bearerToken;
-      next();
-   } else {
-      res.status(403).json({"error": "No token provided"});
-   }
+ function logErrors(err: Error, req: any, res: Response, next: NextFunction) {
+    logger.err(err.stack);
+    next(err);
+  }
+
+/**
+ * Funzione errorHandler
+ * 
+ * Ritorna lo stato dell'errore
+ * 
+ * @param err errore 
+ * @param req richiesta da parte dell'utente
+ * @param res risposta da parte del sistema
+ * @param next riferimento al middleware successivo
+ */
+function errorHandler(err: Error, req: any, res: Response, next: NextFunction) {
+    res.status(500).send({"error": err.message});
 }
+
+/************************ JWT AUTHENTICATION *******************************/
+
+/**
+ * Funzione checkHeader 
+ * 
+ * Verifica che la richiesta contenga un Header
+ * 
+ * @param req richiesta da parte dell'utente
+ * @param res risposta da parte del sistema
+ * @param next riferimento al middleware successivo
+ */
+function checkHeader(req: any, res: Response, next: NextFunction) {
+    const authHeader = req.headers.authorization;
+    (authHeader) ? next(): res.status(403).json({"error": "No authorization header"});
+    
+};
+
 
 /**
  * Funzione verifyKey
@@ -72,39 +104,29 @@ function checkToken(req: any, res: Response, next: NextFunction) {
     }
 }
 
-/**
- * Funzione logErrors
- * 
- * Stampa l'errore
- * 
- * @param req richiesta da parte dell'utente
- * @param res risposta da parte del sistema
- * @param next riferimento al middleware successivo
- */
-function logErrors(err: Error, req: any, res: Response, next: NextFunction) {
-    logger.err(err.stack);
-    next(err);
-  }
 
+
+/************************ MAYBE JWT AUTHENTICATION *******************************/
 /**
- * Funzione errorHandler
+ * Funzione checkHeader 
  * 
- * Ritorna lo stato dell'errore
+ * Verifica che la richiesta contenga un Header
  * 
- * @param err errore 
  * @param req richiesta da parte dell'utente
  * @param res risposta da parte del sistema
  * @param next riferimento al middleware successivo
  */
-function errorHandler(err: Error, req: any, res: Response, next: NextFunction) {
-    res.status(500).send({"error": err.message});
-}
+ function checkHeader2(req: any, res: Response, next: NextFunction) {
+    const authHeader = req.headers.authorization;
+    (authHeader) ? next(): Server.Request(req,res);
+};
 
 
 export default {
-  checkHeader,
   checkPayloadHeader,
   checkToken,
+  checkHeader,
+  checkHeader2,
   verifyKey,
   logErrors,
   errorHandler
