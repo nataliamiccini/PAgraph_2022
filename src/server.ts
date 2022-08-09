@@ -4,6 +4,7 @@ import * as Service from './services/service'
 import {Req} from './services/request'
 import {MapValue} from './services/map'
 import { forEachTrailingCommentRange } from 'typescript';
+import { Request } from "express"
 const app = express();
 
 app.use(express.json());
@@ -84,15 +85,19 @@ app.get('/modelList', function(req: any, res: any) {
   
 });
 app.get('/nodi', function(req: any, res: any) {    
-    Service.nodi(req.body.id_edge, res);
+    Service.n_nodi(req.body.id_graph, res).then(r=>{
+      res.json(r)
+    })
     
 });
 
-app.post('/createGraph',function(req: any, res: any) { 
-    const route = new Graph(req.body) 
-    console.log(route)
-    Service.endGraph(req.body,res)
+app.post('/createGraph/:FKuser_id',function(req: any, res: any) { 
 
+    Service.createTableGraph(req.body, req.params['FKuser_id'],res);
+   /* let idGraph=Service.MaxidGraph()
+    console.log("idGraph  "+idGraph)*/
+    Service.updateE()
+    Service.updateN(req.body,req.params['FKuser_id'],res)
 });
 
 app.get('/nodi', async function(req: any, res: any) {    
