@@ -12,7 +12,7 @@ function checkUserExistenceParam(req: any, res: any, next: any) {
     });
 };
 function checkCreatorExistence(req: any, res: any, next: any) {
-    Service.checkCreator(req.body.user_id, res).then((check) => {
+    Service.checkCreator(req.body.id_user, res).then((check) => {
     (check ) ? next() : res.status(500).json({"error": "User not found"});
     });
 };
@@ -61,6 +61,18 @@ function checkARange(req: any, res: any, next: any) : void {
     });
 };
 
+function checkZero(req: any, res: any, next: any) : void {
+    Service.checkZero(req.body.id_user).then((check) => {
+    (check) ? next() : res.status(401).json({"error": "Unauthorized"});
+    });
+};
+
+function checkZeroParam(req: any, res: any, next: any) : void {
+    Service.checkZero(req.params['FKuser_id']).then((check) => {
+    (check) ? next() : res.status(401).json({"error": "Unauthorized"});
+    });
+};
+
 
 export default {
     checkUserExistence,
@@ -72,5 +84,7 @@ export default {
     checkUser,
     checkARange,
     checkCreatorExistence,
-    checkAdmin
+    checkAdmin,
+    checkZero,
+    checkZeroParam
 };

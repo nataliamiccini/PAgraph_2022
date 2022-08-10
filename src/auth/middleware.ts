@@ -74,6 +74,15 @@ export const creator = [
 export const Checkrange=[
     mid.checkARange
 ];
+
 export const CheckPayload=[
     authJwt.checkPayloadHeader,
-]
+];
+
+export const CheckZero=[
+    mid.checkZero,
+];
+
+export const CheckZeroParam=[
+    mid.checkZeroParam,
+];

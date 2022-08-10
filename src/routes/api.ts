@@ -38,27 +38,27 @@ apiRouter.get('/modelList', middleware.EdgeExistance, function(req: any, res: an
     })
 });
 
-apiRouter.get('/path/:FKuser_id', middleware.GraphParam, middleware.Token, async function(req: any, res: any) {  
+apiRouter.get('/path/:FKuser_id',middleware.CheckZeroParam, middleware.GraphParam, middleware.Token, async function(req: any, res: any) {  
     Service.path(req.body.id_graph, req.body.versions, req.body.node_a, req.body.node_b, req.params['FKuser_id'], res).then( result => {
       res.json(result)
     })
 });
 
-apiRouter.get('/rejectReq', middleware.UserExistance, middleware.creator,function(req: any, res: any) { 
+apiRouter.get('/rejectReq', middleware.CheckZero, middleware.UserExistance, middleware.creator,function(req: any, res: any) { 
     Service.Reject(req.body.request_id,res)
 });
 
 
 
-apiRouter.get('/ShowRequest',middleware.UserExistance, middleware.creator, function(req: any, res: any) {    
+apiRouter.get('/ShowRequest', middleware.CheckZero, middleware.UserExistance, middleware.creator, function(req: any, res: any) {    
     Service.ShowReq(req.body.id_user);
 });
 
-apiRouter.get('/AcceptReq',middleware.UserExistance, middleware.creator,function(req: any, res: any) {    
+apiRouter.get('/AcceptReq',middleware.CheckZero, middleware.UserExistance, middleware.creator,function(req: any, res: any) {    
     Service.Accept(req.body.request_id,res);
 });
 
-apiRouter.post('/createGraph/:FKuser_id',middleware.GraphCreate, middleware.TokenCreate, async function(req: any, res: any) { 
+apiRouter.post('/createGraph/:FKuser_id', middleware.CheckZeroParam, middleware.GraphCreate, middleware.TokenCreate, async function(req: any, res: any) { 
     await Service.createTableGraph(req.body, req.params['FKuser_id'],res).then( result => {
         
         User.decrement({token: result}, {where: {id_user: req.params['FKuser_id']}}).then( arr1 => {
