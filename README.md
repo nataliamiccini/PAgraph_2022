@@ -28,7 +28,7 @@ Tramite un diagramma "Use case" sono rappresente le relazioni tra gli utenti e l
 Esistono 2 tipi di utenti:
 * Admin, che può ricaricare il portafoglio di un dato utente
 * User, che può creare o modificare un modello.
-
+<img src = "img_src/UseCase.png">
 
 #### Schema ER
 
