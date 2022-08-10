@@ -220,9 +220,7 @@ export function createGraph (req: any, FKuser_id: any, FKid_graph: any, res: any
     if((Object.getOwnPropertyNames(req[keys[i]])).length !==0){
       Object.getOwnPropertyNames(req[keys[i]]).forEach(
         function (x) {
-          nodi_interni.push(Object.values(x));
-          //console.log(x)
-          
+          nodi_interni.push(Object.values(x)); 
         }
       );
 
@@ -242,7 +240,6 @@ export function createGraph (req: any, FKuser_id: any, FKid_graph: any, res: any
       
         n_interni=tot_i.length;
         tot_e.add(nodi_interni[z])
-        //date=new Date.now();
         Edge.create({id_edge:ID,node_a:nodi_esterni[i],node_b:String(nodi_interni[z]),versions:1,weight_edge:costo[z],modify_date:Date.now(),FKuser_id:FKuser_id, FKid_graph:FKid_graph}).then((arr)=>{
         });
       } 
@@ -251,8 +248,6 @@ export function createGraph (req: any, FKuser_id: any, FKid_graph: any, res: any
   tot_e.add(nodi_esterni)
   n_esterni = tot_e.size;
   tot = 0.25*n_esterni + 0.01*n_archi
-  //console.log("narchi"+n_archi)
-  //Graph.create({id_graph:max, tot_node:n_esterni, tot_edge: n_archi, cost:tot})
   return tot 
 }; 
 
@@ -373,6 +368,24 @@ export async function findGraph(id_graph: number, versions: number): Promise< Ma
   return map2
 };
 
+/**
+ * Funzione decreaseToken
+ * 
+ * Questa funzione ha il compito di decrementare i token dell'utente che ha eseguito un modello
+ * 
+ * @param user_id id dell'utente
+ * @param costo costo di creazione del grafo
+ * @param res risposta da parte del server
+ * @returns Operazione effettuata o meno
+ */
+export async function decreaseToken(user_id: string, costo: number, res:any){
+  let result = []
+  await User.decrement({token: costo}, {where: {id_user: user_id}}).then( arr => {
+    (arr) ? result.push({'Hai pagato un totale di token ': costo})
+            : result.push({'Operazione non andata a buon fine. Token non decrementati': costo})
+  })
+  return result
+};
 
 /**
  * Funzione path
@@ -387,20 +400,21 @@ export async function findGraph(id_graph: number, versions: number): Promise< Ma
  * @param res risposta da parte del sistema
  * @returns restituisce, sotto forma di JSON, il path, il relativo costo e il tempo impiegato per l'esecuzione
  */
-export async function path(id_graph: number, versions: number, node_a: string, node_b: string, res: any): Promise<Array<any>>{
+export async function path(id_graph: number, versions: number, node_a: string, node_b: string, user_id: string, res: any): Promise<Array<any>>{
   var start
   let ar = []
   let v
-
+  const c = await Graph.findAll({attributes: ["cost"], where: {id_graph: id_graph}}); 
   (!versions) ? v = await Max(id_graph) : v = versions
-  console.log(v)
   await findGraph(id_graph, v).then( arr => {
     const route = new Graph1(Object.fromEntries(arr))
     start = new Date().getTime();
     ar.push(route.path(node_a, node_b, {cost: true}))
-  })
+  }) 
   var end = new Date().getTime();
+  const b = await decreaseToken(user_id, c[0].getDataValue("cost"), res)
   ar.push({"timestamp" : String(Number(end - start) + " ms")})
+  ar.push(b)
  return ar
 };
 
@@ -587,30 +601,3 @@ export async function SimulationPar (id_edge: number[], start: number[], end: nu
 return arr
 };
 
-/**
- * Funzione tot_cost
- * 
- * Calcola il costo di creazione di un grafo 
- * 
- * @param req body contenente il grafo da creare
- * @returns costo di creazione
- */
-export async function tot_cost(req: any) {
-  let nodi = new Set()
-  let edge = 0
-  const keys = Object.keys(req);
-  let values =  Object.values(req)
-  Object.getOwnPropertyNames(req).forEach( (x) => {
-      nodi.add(x)
-  })
-  console.log(nodi)
-  for( var item in Array.from(nodi) ){
-    Object.getOwnPropertyNames(req[keys[item]]).forEach( function (x) {
-      nodi.add(x.toString());
-      edge+=1
-      
-    })
-  }
-  const cost = nodi.size*0.25+edge*0.01
-  return cost
-};

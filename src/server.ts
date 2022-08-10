@@ -1,9 +1,7 @@
 import * as express from 'express';
-const Graph = require('node-dijkstra')
 import * as Service from './services/service'
 import {Req} from './services/request'
 import {MapValue} from './services/map'
-import { forEachTrailingCommentRange } from 'typescript';
 import { Request } from "express"
 import * as middleware from './auth/middleware';
 import logger from 'jet-logger';
@@ -15,7 +13,7 @@ app.use(express.json());
 
 let map= new MapValue<Req<number,string[],string>>();
 
-app.post('/createGraph/:FKuser_id',middleware.GraphParam,function(req: any, res: any) { 
+app.post('/createGraph/:FKuser_id',middleware.GraphParam, middleware.TokenCreate, function(req: any, res: any) { 
 
     Service.createTableGraph(req.body, req.params['FKuser_id'],res);
     Service.updateE();
@@ -23,7 +21,7 @@ app.post('/createGraph/:FKuser_id',middleware.GraphParam,function(req: any, res:
 });
 
 
-app.get('/update/:FKuser_id',middleware.GraphParam,middleware.EdgeExistance,middleware.jwtReq,function(req: any, res: any) {    
+app.get('/update/:FKuser_id', middleware.GraphParam, middleware.EdgeExistance, middleware.jwtReq, function(req: any, res: any) {    
   let id=[];
   let request=req.body.id_edge;
   for (var key in request) {
@@ -49,7 +47,7 @@ export function Request(req: any, res: any) {
 };
 
 
-app.get('/ShowRequest', middleware.creator,function(req: any, res: any) {    
+app.get('/ShowRequest', middleware.creator, function(req: any, res: any) {    
   res.json(map);
 });
 
@@ -96,8 +94,8 @@ app.get('/rejectReq', middleware.creator,function(req: any, res: any) {
 });
 
 
-app.get('/path/:FKuser_id', middleware.GraphParam, async function(req: any, res: any) {    
-  await Service.path(req.body.id_graph, req.body.versions, req.body.node_a, req.body.node_b, res).then( result => {
+app.get('/path/:FKuser_id', middleware.GraphParam, middleware.Token, async function(req: any, res: any) {  
+  await Service.path(req.body.id_graph, req.body.versions, req.body.node_a, req.body.node_b, req.params['FKuser_id'], res).then( result => {
     res.json(result)
   })
 });
@@ -126,13 +124,13 @@ app.post('/charging', middleware.NoPayloadjwt,middleware.admin, async function(r
   await Service.chargingAdmin(req.body.mail, req.body.token, res)
 });
 
-app.get('/sim-seq', middleware.Checkrange, async function(req: any, res: any) {    
+app.get('/sim-seq', middleware.EdgeExistance, middleware.Checkrange, async function(req: any, res: any) {    
   await Service.simulationSeq(req.body.id_edge, req.body.start, req.body.end, req.body.increment, req.body.node_a, req.body.node_b, res).then( result => {
     res.json(result)
   })
 });
 
-app.get('/sim-par', async function(req: any, res: any) {    
+app.get('/sim-par', middleware.EdgeExistance, middleware.Checkrange, async function(req: any, res: any) {    
   await Service.SimulationPar(req.body.id_edge, req.body.start, req.body.end, req.body.increment, req.body.node_a, req.body.node_b, res).then( result => {
     res.json(result)
   })

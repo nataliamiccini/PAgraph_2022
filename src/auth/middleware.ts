@@ -28,8 +28,8 @@ export const Token = [
     mid.checkToken
 ];
 
-export const TokenParam = [
-    mid.checkTokenParam
+export const TokenCreate = [
+    mid.checkTokenCreate
 ];
 
 export const GraphParam=[
