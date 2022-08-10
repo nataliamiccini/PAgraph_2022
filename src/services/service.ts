@@ -456,16 +456,5 @@ export async function SimulationPar (id_edge: number[], start: number[], end: nu
 return arr
 };
 
-export async function range(start: number[], end: number[], increment: number[], res: any): Promise<boolean>{
-  let result: any
-  if(start.filter(x => x>0).length < start.length || end.filter(x => x>0).length < end.length 
-      || increment.filter(x => x>0).length < increment.length 
-      || JSON.stringify(start) === JSON.stringify(end)){
-    result = false
-  }
-  else if (start.every((element, index) => element < end[index])) {
-      result = true
-  }
- return result
-};
+
 

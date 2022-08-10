@@ -96,7 +96,7 @@ app.get('/rejectReq', middleware.creator,function(req: any, res: any) {
 });
 
 
-app.get('/path:FKuser_id', middleware.GraphParam, async function(req: any, res: any) {    
+app.get('/path/:FKuser_id', middleware.GraphParam, async function(req: any, res: any) {    
   await Service.path(req.body.id_graph, req.body.versions, req.body.node_a, req.body.node_b, res).then( result => {
     res.json(result)
   })
@@ -126,7 +126,7 @@ app.post('/charging', middleware.authjwt,middleware.admin, async function(req: a
   await Service.chargingAdmin(req.body.id_user, req.body.user, req.body.token, res)
 });
 
-app.get('/sim-seq', async function(req: any, res: any) {    
+app.get('/sim-seq', middleware.Checkrange, async function(req: any, res: any) {    
   await Service.simulationSeq(req.body.id_edge, req.body.start, req.body.end, req.body.increment, req.body.node_a, req.body.node_b, res).then( result => {
     res.json(result)
   })

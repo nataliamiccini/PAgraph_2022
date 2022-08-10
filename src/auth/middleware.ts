@@ -55,3 +55,7 @@ export const admin = [
 export const creator = [
     mid.checkCreatorExistence
 ];
+
+export const Checkrange=[
+    mid.range
+]
