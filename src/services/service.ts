@@ -3,11 +3,71 @@ import { Edge } from '../models/edge-model';
 import { Graph } from '../models/graph-models';
 import { Model, Sequelize, where, QueryTypes } from 'sequelize';
 import { Singleton } from '../connection/Singleton';
+import {MapValue} from '../services/map'
+import {Req} from '../services/request'
 
 
 const Graph1 = require('node-dijkstra');
 const sequelize: Sequelize = Singleton.getConnection();
 
+let map= new MapValue<Req<number,string[],string>>();
+
+export function Request(req: any, res: any) {  
+  let x = new Req<number,string[],string>();
+  let s4 = Math.floor((1 + Math.random()) * 0x10000)
+  .toString(16)
+  .substring(1);
+
+  x.SetValue(s4 ,req.body.new_weight, req.body.id_edge);
+  map.pushI(x);
+
+  res.json("la richiesta è stata aggiunta");
+};
+
+export function ShowReq(res:any){
+  res.json(map)
+}
+
+export function Reject(request_id:string,res:any){
+  console.log("-----")
+  let x = JSON.stringify(map);
+  let y = JSON.parse(x);
+  console.log("++++++++++++++++",y)
+  for (let key in y) {
+    if (y.hasOwnProperty(key)) {
+      let z=y[key];
+      let l=Object.values(z);
+      console.log("++++++++++++++++",l)
+      l.forEach(function(x){
+       if (x["request_id"]===request_id) 
+        {res.json("é stata eliminata la richiesta: "+request_id);
+        let index= l.indexOf(x);
+        map.pop(index);} else{res.json("Richiesta non trovata")}
+            
+      })
+    }
+  }
+}
+ export function Accept(request_id:string,res:any){
+  let x = JSON.stringify(map);
+  let y = JSON.parse(x);
+
+  for (let key in y) {
+    if (y.hasOwnProperty(key)) {
+      let z=y[key];
+      let l=Object.values(z);
+      l.forEach(function(x){
+       if (x["request_id"]===request_id) 
+        {res.json("é stata accettata la richiesta: "+request_id);
+        updateWeight(x["weight"], x["edge_id"], res);
+        let index= l.indexOf(x);
+        map.pop(index);
+      }
+            
+      })
+    }
+  }
+ }
 /**
  * Funzione VersionsList
  * 

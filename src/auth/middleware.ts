@@ -43,6 +43,10 @@ export const UserExistance = [
     mid.checkUserExistence
 ];
 
+export const UserExistanceParam = [
+    mid.checkUserExistenceParam
+];
+
 export const GraphExistance = [
     mid.checkGraphExistence
 ];
@@ -65,4 +69,7 @@ export const creator = [
 
 export const Checkrange=[
     mid.checkARange
+];
+export const CheckPayload=[
+    authJwt.checkPayloadHeader,
 ]
