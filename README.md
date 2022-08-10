@@ -32,7 +32,8 @@ Esistono 2 tipi di utenti:
 
 #### Schema ER
 
-<img src = "img_src/ER.drawio.png">
+<img src = "img_src/db.jpg">
+
 Il database è composto da 3 tabelle:
 * USER: contiente tutte le informazioni relative all'utente ed ha come chiave primaria l'id dell'utente.
 * EDGE : contiene tutte le informazioni relative agli archi di ogni grafo ed ha come chiama primaria l'id dell'edge, mentre le chiavi esterna (che riguardano il creatore del modello e al grafo di appartenenza di ogni arco) fanno rispettivamente riferimento allo id_user nella tabella User e id_graph in Graph.
