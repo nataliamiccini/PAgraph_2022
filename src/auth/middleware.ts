@@ -24,10 +24,6 @@ export const jwtReq=[
 
 ];
 
-export const Token = [
-    mid.checkToken
-];
-
 export const TokenParam = [
     mid.checkTokenParam
 ];

@@ -335,10 +335,7 @@ export async function n_edge(FKid_graph: any, res:any): Promise<number>{
   return tot_edge.size
 };
 
-//calcolo numero nodi a partire dal body
-export async function NumNodeGraph(){
 
-}
 
 export async function cost(req: any, res: any): Promise<number>{
   let cost: number

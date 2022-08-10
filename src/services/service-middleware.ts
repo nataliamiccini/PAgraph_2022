@@ -93,12 +93,12 @@ export async function checkCrator ( FKuser_id: string, res: any): Promise<boolea
  * @param res risposta da parte del sistema
  */
 
-export async function checkToken ( user_id: string, id_graph: number, res: any): Promise<boolean> {
+export async function checkToken ( user_id: string, req:any, res: any): Promise<boolean> {
     let result: any
     let t = await User.findAll({where: {id_user: user_id}, attributes: ["token"]})
-    let c = await Graph.findAll({where: {id_graph: id_graph}, attributes: ["cost"]})
-    
-      if (t[0].getDataValue("token")>c[0].getDataValue("cost")){
+    let c = await tot_cost(req)
+   
+      if (t[0].getDataValue("token") > c){
         result=true;
       }
       else {
@@ -107,6 +107,25 @@ export async function checkToken ( user_id: string, id_graph: number, res: any):
     return result;
   };
 
+export async function tot_cost(req: any): Promise<number> {
+    let nodi = new Set()
+    let edge = 0
+    const keys = Object.keys(req);
+    Object.getOwnPropertyNames(req).forEach( (x) => {
+        nodi.add(x)
+    })
+
+    for( var item in Array.from(nodi) ){
+      Object.getOwnPropertyNames(req[keys[item]]).forEach( function (x) {
+        nodi.add(x.toString());
+        edge+=1
+        
+      })
+    }
+    const cost = nodi.size*0.25+edge*0.01;
+    console.log(cost)
+    return cost;
+  }
  /**
  * Funzione checkRole
  * 
@@ -143,22 +162,3 @@ export async function Range(start:any,end:any,increment:any,res: any): Promise<b
    return result
   };
 
-export async function tot_cost(req: any) {
-    let nodi = new Set()
-    let edge = 0
-    const keys = Object.keys(req);
-    let values =  Object.values(req)
-    Object.getOwnPropertyNames(req).forEach( (x) => {
-        nodi.add(x)
-    })
-    console.log(nodi)
-    for( var item in Array.from(nodi) ){
-      Object.getOwnPropertyNames(req[keys[item]]).forEach( function (x) {
-        nodi.add(x.toString());
-        edge+=1
-        
-      })
-    }
-    const cost = nodi.size*0.25+edge*0.01
-    return cost
-  }

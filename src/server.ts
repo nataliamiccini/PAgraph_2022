@@ -15,7 +15,7 @@ app.use(express.json());
 
 let map= new MapValue<Req<number,string[],string>>();
 
-app.post('/createGraph/:FKuser_id',middleware.GraphParam,function(req: any, res: any) { 
+app.post('/createGraph/:FKuser_id', middleware.GraphParam,function(req: any, res: any) { 
 
     Service.createTableGraph(req.body, req.params['FKuser_id'],res);
     Service.updateE();
@@ -23,7 +23,7 @@ app.post('/createGraph/:FKuser_id',middleware.GraphParam,function(req: any, res:
 });
 
 
-app.get('/update/:FKuser_id',middleware.GraphParam,middleware.EdgeExistance,middleware.jwtReq,function(req: any, res: any) {    
+app.get('/update/:FKuser_id',middleware.jwtReq,middleware.GraphParam,middleware.EdgeExistance,function(req: any, res: any) {    
   let id=[];
   let request=req.body.id_edge;
   for (var key in request) {
@@ -132,7 +132,7 @@ app.get('/sim-seq', middleware.Checkrange, async function(req: any, res: any) {
   })
 });
 
-app.get('/sim-par', async function(req: any, res: any) {    
+app.get('/sim-par', middleware.Checkrange, async function(req: any, res: any) {    
   await Service.SimulationPar(req.body.id_edge, req.body.start, req.body.end, req.body.increment, req.body.node_a, req.body.node_b, res).then( result => {
     res.json(result)
   })
