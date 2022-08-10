@@ -294,23 +294,14 @@ export async function findGraph(id_graph: number, versions: number, res: any): P
   return map2
 };
 
-export async function path(id_graph: number, node_a: string, node_b: string, user_id: string, res: any): Promise<Array<any>>{
+export async function path(id_graph: number, versions: number, node_a: string, node_b: string, res: any): Promise<Array<any>>{
   var start = new Date().getTime();
   let ar = []
-  const v = await Max(id_graph)
-  await findGraph(id_graph, v, res).then( arr => {
-    const route = new Graph1(Object.fromEntries(arr))
-    ar.push(route.path(node_a, node_b, {cost: true}))
-  })
-  var end = new Date().getTime();
-  ar.push({"timestamp" : String(Number(end - start) + " ms")})
- return ar 
-};
+  let v
 
-export async function pathV(id_graph: number, versions: number, node_a: string, node_b: string, user_id: string, res: any): Promise<Array<any>>{
-  var start = new Date().getTime();
-  let ar = []
-  await findGraph(id_graph, versions, res).then( arr => {
+  (!versions) ? v = await Max(id_graph) : v = versions
+  console.log(v)
+  await findGraph(id_graph, v, res).then( arr => {
     const route = new Graph1(Object.fromEntries(arr))
     ar.push(route.path(node_a, node_b, {cost: true}))
   })
@@ -332,7 +323,7 @@ export async function n_nodi(req: any, res: any): Promise<number>{
   return tot_node.size
 };
 
-//calcolo numero archi a partire dal grafo grato
+
 export async function n_edge(FKid_graph: any, res:any): Promise<number>{
   let tot_edge = new Set
   await Edge.findAll({where: {FKid_graph: FKid_graph}}).then(arr => {
@@ -340,7 +331,6 @@ export async function n_edge(FKid_graph: any, res:any): Promise<number>{
       tot_edge.add(arr[i].getDataValue("id_edge"))
     }
   })
-  //const array = Array.from(tot_node);
   console.log(tot_edge)
   return tot_edge.size
 };
@@ -351,7 +341,6 @@ export async function NumNodeGraph(){
 }
 
 export async function cost(req: any, res: any): Promise<number>{
- // let tot_edge = new Set
   let cost: number
   await Promise.all([n_nodi(req, res), n_edge(req, res)]).then(result => {
     cost = (result[0]*0.25 + result[1]*0.01)
@@ -363,7 +352,7 @@ export async function cost(req: any, res: any): Promise<number>{
 
 async function Max (id_graph: number): Promise<number>{
   const result = await sequelize.query(
-    "SELECT MAX(versions) as max1 FROM edge where FKid_graph" + id_graph,
+    "SELECT MAX(versions) as max1 FROM edge where FKid_graph=" + id_graph,
     {
       type: QueryTypes.SELECT
     }
@@ -386,22 +375,34 @@ export async function chargingAdmin ( user_id: string, user: string, token: numb
   });
 };
 
-export async function simulation (id_edge: number, start: number, end: number, increment: number, node_a: string, node_b: string, res: any ): Promise<any>  {
-  const ar = await Edge.findAll({attributes: ["node_a", "node_b", "versions", "FKid_graph"], where: {id_edge: id_edge}})
-  let map = await findGraph(ar[0].getDataValue("FKid_graph"), ar[0].getDataValue("versions"), res)
-  let b = await map.get(ar[0].getDataValue("node_a"))
-  let arr =[]
+export async function getInfo(id_edge: number[]): Promise<any>{
+  let array: Array<Object> = new Array
+  for( let x of id_edge)  {
+    await Edge.findAll({attributes: ["node_a", "node_b", "versions", "FKid_graph"], where: {id_edge: x}}).then(ar => {
+      array.push(JSON.parse(JSON.stringify(ar)))
+    })
+  }
+  return array
+};
+
+export async function simulationSeq (id_edge: number[], start: number[], end: number[], increment: number[], node_a: string, node_b: string, res: any ): Promise<any>  {
+  const ar = await getInfo(id_edge)
+  let map = await findGraph(ar[0][0].FKid_graph, ar[0][0].versions, res)
+  let arr = []
   let arrg = []
-  for (let i = Number(start); i <= Number(end); i+=Number(increment) ){ 
-    b[ar[0].getDataValue("node_b")] = i
-    let map1 = new Map(JSON.parse(JSON.stringify(Array.from(map))))
-    console.log(map1)
-    
-    arrg.push(map1)
-    
-    let route = new Graph1(Object.fromEntries(map1))
-    
-    arr.push(route.path(node_a, node_b, {cost: true}))
+  let b = []
+  for ( let i = 0; i < id_edge.length; i++){
+    b.push(map.get(ar[i][0].node_a))
+    for (let y = Number(start[i]); y <= Number(end[i]); y+= Number(increment[i]) ){
+      b[i][ar[i][0].node_b]=y
+      let map1 = new Map(JSON.parse(JSON.stringify(Array.from(map))))
+      
+      arrg.push(map1)
+      
+      let route = new Graph1(Object.fromEntries(map1))
+      
+      arr.push(route.path(node_a, node_b, {cost: true}))
+    }
   }
   const min_cost = Math.min(...arr.map(o => o.cost))
   arr.push({"The best result costs: ": min_cost})
@@ -409,6 +410,62 @@ export async function simulation (id_edge: number, start: number, end: number, i
   const index = arr.findIndex((co) => co.cost === min_cost);
   arr.push({"The best result is obtained with the follow graph: ": Object.fromEntries(arrg[index])})
   
+
 return arr
 
 };
+
+export async function SimulationPar (id_edge: number[], start: number[], end: number[], increment: number[], node_a: string, node_b: string, res: any ): Promise<Array<any>>  {
+  const ar = await getInfo(id_edge)
+  let map = await findGraph(ar[0][0].FKid_graph, ar[0][0].versions, res)
+  let arr = []
+  let arrg = []
+  let b = []
+  let s = []
+  for ( let i = 0; i < id_edge.length; i++){
+    let val = map.get(ar[i][0].node_a)
+    val[ar[i][0].node_b]=start[i] 
+    b.push(val)
+    s.push(b[i][ar[i][0].node_b])
+  }
+  let map1 = new Map(JSON.parse(JSON.stringify(Array.from(map))))
+  arrg.push(map1)
+  while (JSON.stringify(s)!==JSON.stringify(end)) {
+    for( let i =0; i < id_edge.length; i++) {
+      if (b[i][ar[i][0].node_b] != end[i] ){
+        b[i][ar[i][0].node_b]+=increment[i]
+        s[i]+=increment[i]
+      }
+    }
+  let map2 = new Map(JSON.parse(JSON.stringify(Array.from(map))))
+  arrg.push(map2)
+  }
+  for(let y = 0; y < arrg.length; y++) {
+
+    let route = new Graph1(Object.fromEntries(arrg[y]))
+    arr.push(route.path(node_a, node_b, {cost: true}))
+
+  }
+  const min_cost = Math.min(...arr.map(o => o.cost))
+  arr.push({"The best result costs: ": min_cost})
+  
+  const index = arr.findIndex((co) => co.cost === min_cost);
+  arr.push({"The best result is obtained with the follow graph: ": Object.fromEntries(arrg[index])})
+  
+
+return arr
+};
+
+export async function range(start: number[], end: number[], increment: number[], res: any): Promise<boolean>{
+  let result: any
+  if(start.filter(x => x>0).length < start.length || end.filter(x => x>0).length < end.length 
+      || increment.filter(x => x>0).length < increment.length 
+      || JSON.stringify(start) === JSON.stringify(end)){
+    result = false
+  }
+  else if (start.every((element, index) => element < end[index])) {
+      result = true
+  }
+ return result
+};
+
