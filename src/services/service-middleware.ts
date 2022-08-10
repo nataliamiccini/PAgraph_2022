@@ -129,3 +129,36 @@ export async function checkToken ( user_id: string, id_graph: number, res: any):
     });
     return result;
 };
+
+export async function Range(start:any,end:any,increment:any,res: any): Promise<boolean>{
+    let result: any
+    if(start.filter(x => x>0).length < start.length || end.filter(x => x>0).length < end.length 
+        || increment.filter(x => x>0).length < increment.length 
+        || JSON.stringify(start) === JSON.stringify(end)){
+      result = false
+    }
+    else if ((start).every((element, index) => element < end[index])) {
+        result = true
+    }
+   return result
+  };
+
+export async function tot_cost(req: any) {
+    let nodi = new Set()
+    let edge = 0
+    const keys = Object.keys(req);
+    let values =  Object.values(req)
+    Object.getOwnPropertyNames(req).forEach( (x) => {
+        nodi.add(x)
+    })
+    console.log(nodi)
+    for( var item in Array.from(nodi) ){
+      Object.getOwnPropertyNames(req[keys[item]]).forEach( function (x) {
+        nodi.add(x.toString());
+        edge+=1
+        
+      })
+    }
+    const cost = nodi.size*0.25+edge*0.01
+    return cost
+  }

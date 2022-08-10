@@ -52,19 +52,12 @@ function checkAdmin(req: any, res: any, next: any) : void {
     });
 };
 
+function checkARange(req: any, res: any, next: any) : void {
+    Service.Range(req.body.start,req.body.end,req.body.increment, res).then((check) => {
+    (check) ? next() : res.status(500).json({"error": "Range not valid"});
+    });
+};
 
-async function range(req:any,es: any): Promise<boolean>{
-    let result: any
-    if((req.body.start).filter(x => x>0).length < (req.body.start).length || (req.body.end).filter(x => x>0).length < (req.body.end).length 
-        || (req.body.increment).filter(x => x>0).length < (req.body.increment).length 
-        || JSON.stringify(req.body.start) === JSON.stringify(req.body.end)){
-      result = false
-    }
-    else if ((req.body.start).every((element, index) => element < (req.body.end)[index])) {
-        result = true
-    }
-   return result
-  };
 
 export default {
     checkUserExistence,
@@ -74,7 +67,7 @@ export default {
     checkToken,
     checkTokenParam,
     checkUser,
-    range,
+    checkARange,
     checkCreatorExistence,
     checkAdmin
 };

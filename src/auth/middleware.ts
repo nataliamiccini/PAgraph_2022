@@ -64,5 +64,5 @@ export const creator = [
 ];
 
 export const Checkrange=[
-    mid.range
+    mid.checkARange
 ]

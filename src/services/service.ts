@@ -458,22 +458,4 @@ return arr
 
 
 
-export async function tot_cost(req: any) {
-  let nodi = new Set()
-  let edge = 0
-  const keys = Object.keys(req);
-  let values =  Object.values(req)
-  Object.getOwnPropertyNames(req).forEach( (x) => {
-      nodi.add(x)
-  })
-  console.log(nodi)
-  for( var item in Array.from(nodi) ){
-    Object.getOwnPropertyNames(req[keys[item]]).forEach( function (x) {
-      nodi.add(x.toString());
-      edge+=1
-      
-    })
-  }
-  const cost = nodi.size*0.25+edge*0.01
-  return cost
-}
+
