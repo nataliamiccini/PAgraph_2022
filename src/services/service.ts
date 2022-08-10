@@ -369,8 +369,8 @@ export async function decreaseToken(user_id: string, costo: number, res:any){
 }
 
 
-export async function chargingAdmin ( user_id: string, user: string, token: number, res: any ): Promise<any>{
-  await User.increment({token: token}, {where: {id_user: user}}).then(arr => {
+export async function chargingAdmin ( email: string, token: number, res: any ): Promise<any>{
+  await User.increment({token: token}, {where: {email: email}}).then(arr => {
       res.json({"Effettuata ricarica di token": token});
   });
 };

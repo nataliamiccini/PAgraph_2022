@@ -122,8 +122,8 @@ app.get('/filter', async function(req: any, res: any) {
   })
 });
 
-app.post('/charging', middleware.authjwt,middleware.admin, async function(req: any, res: any){
-  await Service.chargingAdmin(req.body.id_user, req.body.user, req.body.token, res)
+app.post('/charging', middleware.NoPayloadjwt,middleware.admin, async function(req: any, res: any){
+  await Service.chargingAdmin(req.body.mail, req.body.token, res)
 });
 
 app.get('/sim-seq', middleware.Checkrange, async function(req: any, res: any) {    

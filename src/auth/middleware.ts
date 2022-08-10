@@ -9,6 +9,13 @@ export const authjwt = [
     authJwt.errorHandler
 ];
 
+export const NoPayloadjwt = [
+    authJwt.checkHeader,
+    authJwt.verifyKey,
+    authJwt.logErrors,
+    authJwt.errorHandler
+];
+
 export const jwtReq=[
     authJwt.checkHeader2,
     authJwt.verifyKey,
