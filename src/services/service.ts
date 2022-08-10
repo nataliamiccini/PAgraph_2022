@@ -587,7 +587,6 @@ export async function SimulationPar (id_edge: number[], start: number[], end: nu
 return arr
 };
 
-
 /**
  * Funzione tot_cost
  * 
