@@ -48,11 +48,8 @@ Vengono riportati alcuni diagrammi delle sequenze per descrivere una sequenza di
 * **Chiamata POST /update/:FKuser_id :**
 <img src = "img_src/update.drawio.png">
 
-* **Chiamata GET /AcceptReq :**
-<img src = "img_src/.drawio.png">
-
-* **Chiamata GET /rejectReq :**
-<img src = "img_src/.drawio.png">
+* **Chiamate GET /ShowRequest, GET /AcceptReq, GET /rejectReq :**
+<img src = "img_src/request.drawio.png">
 
 * **Chiamata GET /path/:FKuser_id :**
 <img src = "img_src/.drawio.png">
