@@ -355,23 +355,14 @@ export async function findGraph(id_graph: number, versions: number, res: any): P
   return map2
 };
 
-export async function path(id_graph: number, node_a: string, node_b: string, user_id: string, res: any): Promise<Array<any>>{
+export async function path(id_graph: number, versions: number, node_a: string, node_b: string, res: any): Promise<Array<any>>{
   var start = new Date().getTime();
   let ar = []
-  const v = await Max(id_graph)
-  await findGraph(id_graph, v, res).then( arr => {
-    const route = new Graph1(Object.fromEntries(arr))
-    ar.push(route.path(node_a, node_b, {cost: true}))
-  })
-  var end = new Date().getTime();
-  ar.push({"timestamp" : String(Number(end - start) + " ms")})
- return ar 
-};
+  let v
 
-export async function pathV(id_graph: number, versions: number, node_a: string, node_b: string, user_id: string, res: any): Promise<Array<any>>{
-  var start = new Date().getTime();
-  let ar = []
-  await findGraph(id_graph, versions, res).then( arr => {
+  (!versions) ? v = await Max(id_graph) : v = versions
+  console.log(v)
+  await findGraph(id_graph, v, res).then( arr => {
     const route = new Graph1(Object.fromEntries(arr))
     ar.push(route.path(node_a, node_b, {cost: true}))
   })
@@ -393,21 +384,6 @@ export async function n_nodi(req: any, res: any): Promise<number>{
   return tot_node.size
 };
 
-export  function n_edge1(FKid_graph: any, res:any){
- 
-  /*let count =  sequelize.query(
-    "SELECT COUNT(FKid_graph) as num FROM edge WHERE FKid_graph="+FKid_graph,
-    {raw:true,
-      type:QueryTypes.RAW})
-  
-  let Max=(Object.values(count))
-
-  let tot_edge= (Max.map(item=>(item as any).num));
-  console.log(tot_edge)
-
-  return tot_edge*/ 
-};
-
 export async function n_edge(FKid_graph: any, res:any): Promise<number>{
   let tot_edge = new Set
   await Edge.findAll({where: {FKid_graph: FKid_graph}}).then(arr => {
@@ -415,13 +391,11 @@ export async function n_edge(FKid_graph: any, res:any): Promise<number>{
       tot_edge.add(arr[i].getDataValue("id_edge"))
     }
   })
-  //const array = Array.from(tot_node);
   console.log(tot_edge)
   return tot_edge.size
 };
 
 export async function cost(req: any, res: any): Promise<number>{
- // let tot_edge = new Set
   let cost: number
   await Promise.all([n_nodi(req, res), n_edge(req, res)]).then(result => {
     cost = (result[0]*0.25 + result[1]*0.01)
@@ -433,7 +407,7 @@ export async function cost(req: any, res: any): Promise<number>{
 
 async function Max (id_graph: number): Promise<number>{
   const result = await sequelize.query(
-    "SELECT MAX(versions) as max1 FROM edge where FKid_graph" + id_graph,
+    "SELECT MAX(versions) as max1 FROM edge where FKid_graph=" + id_graph,
     {
       type: QueryTypes.SELECT
     }
@@ -549,5 +523,5 @@ export async function range(start: number[], end: number[], increment: number[],
       result = true
   }
  return result
-}
+};
 
