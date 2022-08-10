@@ -43,10 +43,9 @@ Il database è composto da 3 tabelle:
 
 Vengono riportati alcuni diagrammi delle sequenze per descrivere una sequenza di azioni che vengono eseguita quando si accede ad una specifica rotta.
 * **Chiamata POST /createGraph/:FKuser_id :**
-<img src = "img_src/.drawio.png">
+<img src = "img_src/createGraph.drawio.png">
 
 * **Chiamata POST /update/:FKuser_id :**
-<img src = "img_src/.drawio.png">
 
 * **Chiamata GET /AcceptReq :**
 <img src = "img_src/.drawio.png">
