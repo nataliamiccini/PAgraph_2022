@@ -3,81 +3,168 @@ import { Edge } from '../models/edge-model';
 import { Graph } from '../models/graph-models';
 import { Model, Sequelize, where, QueryTypes } from 'sequelize';
 import { Singleton } from '../connection/Singleton';
+import {MapValue} from '../services/map'
+import {Req} from '../services/request'
 
 
 const Graph1 = require('node-dijkstra');
 const sequelize: Sequelize = Singleton.getConnection();
 
-export async function VersionsList(date:Date,id_edge:string,FKid_graph:number,res:any){
-  let a;
+let map= new MapValue<Req<number,string[],string>>();
+
+export function Request(req: any, res: any) {  
+  let x = new Req<number,string[],string>();
+  let s4 = Math.floor((1 + Math.random()) * 0x10000)
+  .toString(16)
+  .substring(1);
+
+  x.SetValue(s4 ,req.body.new_weight, req.body.id_edge);
+  map.pushI(x);
+
+  res.json("la richiesta è stata aggiunta");
+};
+
+export function ShowReq(res:any){
+  res.json(map)
+}
+
+export function Reject(request_id:string,res:any){
+  console.log("-----")
+  let x = JSON.stringify(map);
+  let y = JSON.parse(x);
+  console.log("++++++++++++++++",y)
+  for (let key in y) {
+    if (y.hasOwnProperty(key)) {
+      let z=y[key];
+      let l=Object.values(z);
+      console.log("++++++++++++++++",l)
+      l.forEach(function(x){
+       if (x["request_id"]===request_id) 
+        {res.json("é stata eliminata la richiesta: "+request_id);
+        let index= l.indexOf(x);
+        map.pop(index);} else{res.json("Richiesta non trovata")}
+            
+      })
+    }
+  }
+}
+ export function Accept(request_id:string,res:any){
+  let x = JSON.stringify(map);
+  let y = JSON.parse(x);
+
+  for (let key in y) {
+    if (y.hasOwnProperty(key)) {
+      let z=y[key];
+      let l=Object.values(z);
+      l.forEach(function(x){
+       if (x["request_id"]===request_id) 
+        {res.json("é stata accettata la richiesta: "+request_id);
+        updateWeight(x["weight"], x["edge_id"], res);
+        let index= l.indexOf(x);
+        map.pop(index);
+      }
+            
+      })
+    }
+  }
+ }
+/**
+ * Funzione VersionsList
+ * 
+ * Questa funzione restituisce l’elenco delle revisioni dei pesi di un dato modello eventualmente
+ * filtrando per data di modifica o arco
+ *  
+ * @param date data di modifica attraverso cui si vuole filtrare l'elenco delle revisioni
+ * @param id_edge id dell'arco attraverso cui si vuole filtrare l'elenco delle revisioni
+ * @param FKid_graph id del grafo di cui si vuole l'elenco delle revisioni
+ * @param res risposta da parte del server
+ * @returns elenco delle revisioni
+ */
+export async function VersionsList(date: Date, id_edge: string, FKid_graph: number, res: any): Promise<any> {
+  let a: any;
 
   if(!date && !id_edge){
-    a = await Edge.findAll({attributes:["versions"], group:['versions'], where:{FKid_graph:FKid_graph}});
+      a = await Edge.findAll({attributes: ["versions"], group: ['versions'], where: {FKid_graph: FKid_graph}});
   
-    }else if(!date&& id_edge){
-      a = await Edge.findAll({attributes:["versions"],group:['versions'],where:{id_edge:id_edge, FKid_graph:FKid_graph} });
-  
-    }else if(!id_edge && date){
-      a = await Edge.findAll({attributes:["versions"], group:['versions'],where:{modify_date:date, FKid_graph:FKid_graph}});
-    }
-  return a;
-  }
-
-
-export async function ModelList(date:Date,id_edge:string,res:any):Promise<Array<any>>{
-let a=[];
-let id;
-let mapModel: Map<number, number[] > = new Map();
-if(!date && !id_edge){
-  a = await Edge.findAll({attributes:["FKid_graph","versions"]});
-
   }else if(!date&& id_edge){
-    a = await Edge.findAll({attributes:["FKid_graph","versions"],where:{id_edge:id_edge} });
+      a = await Edge.findAll({attributes: ["versions"], group: ['versions'], where: {id_edge: id_edge, FKid_graph: FKid_graph} });
 
   }else if(!id_edge && date){
-    a = await Edge.findAll({attributes:["FKid_graph","versions"], where:{modify_date:date}});
+      a = await Edge.findAll({attributes: ["versions"], group: ['versions'], where: {modify_date:date, FKid_graph: FKid_graph}});
+  }
+  return a;
+};
+
+/**
+ * Funzione ModelList
+ * 
+ * Questa funzione restituisce l’elenco delle revisioni dei pesi di tutti i modelli eventualmente
+ * filtrando per data di modifica o arco
+ * 
+ * @param date data di modifica attraverso cui si vuole filtrare l'elenco delle revisioni
+ * @param id_edge id dell'arco attraverso cui si vuole filtrare l'elenco delle revisioni
+ * @param res risposta da parte del server
+ * @returns elenco delle revisioni
+ */
+export async function ModelList(date: Date, id_edge: string, res: any): Promise<Array<any>> {
+  let a=[];
+  let id;
+  let mapModel: Map<number, number[] > = new Map();
+  if(!date && !id_edge){
+      a = await Edge.findAll({attributes: ["FKid_graph", "versions"]});
+
+  } else if(!date&& id_edge){
+      a = await Edge.findAll({attributes: ["FKid_graph", "versions"], where: {id_edge: id_edge} });
+
+  } else if(!id_edge && date){
+      a = await Edge.findAll({attributes: ["FKid_graph", "versions"], where: {modify_date: date}});
   }
 
-    for(let k =0; k<a.length;k++){
+  for(let k =0; k<a.length;k++){
 
-      id= a[k].getDataValue("FKid_graph");
-      let result = [];
+    id= a[k].getDataValue("FKid_graph");
+    let result = [];
 
-      const b= await Edge.findAll({attributes:["versions"], group: ['versions'],where:{FKid_graph:id}});
+    const b= await Edge.findAll({attributes:["versions"], group: ['versions'],where:{FKid_graph:id}});
 
-      for (let v=0; v<b.length; v++){
-              result.push({
-                version:b[v].getDataValue("versions")
-                });
-              }
-            mapModel.set(id, result);
+    for (let v=0; v<b.length; v++){
+        result.push({version: b[v].getDataValue("versions")})
     }
+    mapModel.set(id, result);
+  }
 
   return (Array.from(mapModel));
-}
+};
 
-export async function WeightOfNodes(id_edge: string):Promise<any>{
-  let elem=[];
-   await Edge.findAll({attributes: ['weight_edge'], where:{ id_edge: id_edge}}).then(arr=>{
-      //res.json(arr);
-      console.log(arr);
-      elem=arr
-  });
-  return elem;
-}
-
+/**
+ * Funzione findMax
+ * 
+ * Restituisce il valore massimo delle versioni presenti nel database
+ * 
+ * @returns valore massimo
+ */
 export async function findMax():Promise<any>{
   let result=await sequelize.query(
     "SELECT MAX(versions) as max1 FROM edge",
     {
     type:QueryTypes.SELECT}
-) 
-let c=(Object.values(result))
-return (c.map(item=>(item as any).max1))
-}
+  ) 
+  let c=(Object.values(result))
+  return (c.map(item=>(item as any).max1))
+};
 
+/**
+ * Funzione updateWeight
+ * 
+ * Gestisce le richieste di cambio peso per uno o più archi da parte degli utenti autenticati e non.
+ * 
+ * @param new_weight nuovo peso che si vuole associare all'arco
+ * @param id_edge id dell'arco
+ * @param res risposta da parte del server
+ */
 export async function updateWeight(new_weight: number, id_edge:any, res:any){
-  let alpha=process.env.ALPHA;
+  let alpha = process.env.ALPHA
+ // (0 < process.env.ALPHA  < 1 )? alpha = process.env.ALPHA : alpha = 0.9
   let keys;
   let version;
   let graphID;
@@ -113,47 +200,57 @@ export async function updateWeight(new_weight: number, id_edge:any, res:any){
       let ID = Math.random().toString(36);
 
       if(keys[i].id_edge===x) {     
-      Edge.create({id_edge:ID, node_a:keys[i].node_a, node_b:keys[i].node_b,versions:m, weight_edge:Number(alpha)*keys[i].weight_edge+(1-Number(alpha))*new_weight,modify_date:Date.now(),FKuser_id:keys[i].FKuser_id,FKid_graph:keys[i].FKid_graph})
+          Edge.create({id_edge:ID, node_a:keys[i].node_a, node_b:keys[i].node_b,versions:m, weight_edge:Number(alpha)*keys[i].weight_edge+(1-Number(alpha))*new_weight,modify_date:Date.now(),FKuser_id:keys[i].FKuser_id,FKid_graph:keys[i].FKid_graph})
       
-    }else {
-      Edge.create({id_edge:ID, node_a:keys[i].node_a, node_b:keys[i].node_b,versions:m, weight_edge:keys[i].weight_edge,modify_date:Date.now(),FKuser_id:keys[i].FKuser_id,FKid_graph:keys[i].FKid_graph})
+      }else {
+          Edge.create({id_edge:ID, node_a:keys[i].node_a, node_b:keys[i].node_b,versions:m, weight_edge:keys[i].weight_edge,modify_date:Date.now(),FKuser_id:keys[i].FKuser_id,FKid_graph:keys[i].FKid_graph})
+      }
     }
-    
-  }
-     
+    });
   });
-  }
-  );
-}
+};
 
 /**
+ * Funzione filterGraph
  * 
- * @param {Object} [option]
- * @param num_archi 
- * @param res 
+ * Restituisce l’elenco dei modelli filtrando numero di nodi e/o numero di archi
  * 
- * @param {number} [option.num_nodi]
- * @param {number} [option.num_archi]
+ * @param num_nodi numero di nodi
+ * @param num_archi numero di archi
+ * @param res risposta da parte del server
+ * @returns elenco dei modelli filtrati
  */
 export async function filterGraph (num_nodi: number, num_archi: number, res: any): Promise<Array<any>>{
-    let ar = []
-    if( num_nodi && !num_archi){
+  let ar = []
+  if( num_nodi && !num_archi){
       const a = await Graph.findAll({attributes: ["id_graph", "tot_edge"], where: {tot_node: num_nodi}})
       ar.push(a)
-    }
-    else if (num_archi && !num_nodi){
+  }
+  else if (num_archi && !num_nodi){
       const b = await Graph.findAll({attributes: ["id_graph","tot_node"], where: {tot_edge: num_archi}})
       ar.push(b)
-    }
-    else if (num_nodi && num_archi){
+  }
+  else if (num_nodi && num_archi){
       const c = await Graph.findAll({attributes: ["id_graph"], where: {tot_node: num_nodi, tot_edge: num_archi}})
       ar.push(c)
-    }
-    return ar
-}
+  }
+  return ar
+};
 
-
-export function createGraph(req:any,FKuser_id:any,FKid_graph:any,res:any){
+/**
+ * Funzione createGraph
+ * 
+ * Questa funzione consente di creare un nuovo modello seguendo l’interfaccia definita nella sezione 
+ * API di https://www.npmjs.com/package/node-dijkstra ed in particolare di specificare 
+ * il grafo con i relativi pesi
+ * 
+ * @param req body che contiene il grafo da creare
+ * @param FKuser_id creatore del nuovo modello
+ * @param FKid_graph id da associare al nuovo modello
+ * @param res risposta da parte del sistema
+ * @returns costo della creazione del grafo
+ */
+export function createGraph (req: any, FKuser_id: any, FKid_graph: any, res: any) {
   let costo=[];
   let nodi_esterni=[];
   let nodi_interni=[];
@@ -166,7 +263,6 @@ export function createGraph(req:any,FKuser_id:any,FKid_graph:any,res:any){
   let n_interni;
   let n_archi;
   let tot;
-  let date;
   keys = Object.keys(req);
   val = Object.values(req);
   
@@ -184,9 +280,7 @@ export function createGraph(req:any,FKuser_id:any,FKid_graph:any,res:any){
     if((Object.getOwnPropertyNames(req[keys[i]])).length !==0){
       Object.getOwnPropertyNames(req[keys[i]]).forEach(
         function (x) {
-          nodi_interni.push(Object.values(x));
-          //console.log(x)
-          
+          nodi_interni.push(Object.values(x)); 
         }
       );
 
@@ -206,7 +300,6 @@ export function createGraph(req:any,FKuser_id:any,FKid_graph:any,res:any){
       
         n_interni=tot_i.length;
         tot_e.add(nodi_interni[z])
-        //date=new Date.now();
         Edge.create({id_edge:ID,node_a:nodi_esterni[i],node_b:String(nodi_interni[z]),versions:1,weight_edge:costo[z],modify_date:Date.now(),FKuser_id:FKuser_id, FKid_graph:FKid_graph}).then((arr)=>{
         });
       } 
@@ -215,11 +308,14 @@ export function createGraph(req:any,FKuser_id:any,FKid_graph:any,res:any){
   tot_e.add(nodi_esterni)
   n_esterni = tot_e.size;
   tot = 0.25*n_esterni + 0.01*n_archi
-  //console.log("narchi"+n_archi)
-  //Graph.create({id_graph:max, tot_node:n_esterni, tot_edge: n_archi, cost:tot})
-  return tot ;
+  return tot 
 }; 
 
+/**
+ * Funzione updateE
+ * 
+ * Esegue l'update del numero totale degli archi nella tabella Graph
+ */
 export async function updateE(){
   let idGraph=await MaxidGraph()
   let result = await sequelize.transaction(async (t) => {
@@ -228,14 +324,24 @@ export async function updateE(){
 
   console.log("----- edge "+count)
 
-   Edge.update({tot_edge:count},{where:{FKid_graph:idGraph}})
+   Edge.update({tot_edge: count}, {where: {FKid_graph: idGraph}})
 
   });
-}
-export async function updateN(req:any,FKuser_id,res:any){
+};
+
+/**
+ * Funzione updateN
+ * 
+ * Esegue l'update del numero totale dei nodi e del costo di creazione del grafo
+ * 
+ * @param req body contenente il grafo
+ * @param FKuser_id id dell'utente che vuole effettuare l'update
+ * @param res risposta da parte del server
+ */
+export async function updateN(req: any, FKuser_id: string, res: any){
   let idGraph=await MaxidGraph()
   let result = await sequelize.transaction(async (t) => {
-    let tot_node= await n_nodi(idGraph,res);
+    let tot_node= await n_nodi(idGraph);
     let cost= await createGraph(req,FKuser_id,idGraph,res);
     let {count ,rows }= await Edge.findAndCountAll({where: {FKid_graph: idGraph}})
     await sequelize.query("UPDATE graph SET tot_node= "+tot_node+",tot_edge="+count+ " , cost="+cost+" WHERE id_graph="+idGraph,
@@ -248,8 +354,16 @@ export async function updateN(req:any,FKuser_id,res:any){
     });
   });
 
-}
+};
 
+/**
+ * Funzione MaxidGraph
+ * 
+ * Trova il valore massimo degli id dei grafi presenti nel database e viene usato per
+ * associare un nuovo id ad un nuovo grafo
+ * 
+ * @returns valore massimo
+ */
 export async function MaxidGraph():Promise<number>{
   let idGraph
   let max;
@@ -267,14 +381,34 @@ console.log("max: ",max++)
 
 };
 
-export async function createTableGraph(req:any,FKuser_id:any,res:any){
-let idGraph=await MaxidGraph()
-Graph.create({id_graph:idGraph, tot_node:0 ,tot_edge:0, cost:0})
+/**
+ * Funzione createTableGraph
+ * 
+ * Questa funzione crea un nuovo grafo nella tabella Graph
+ * 
+ * @param req body contenente il grafo 
+ * @param FKuser_id id dell'utente che vuole creare il grafo
+ * @param res risposta da parte del server
+ */
+export async function createTableGraph(req: any, FKuser_id: any, res: any){
+  let idGraph=await MaxidGraph()
+  Graph.create({id_graph:idGraph, tot_node:0 ,tot_edge:0, cost:0})
 
-createGraph(req,FKuser_id,idGraph,res);
+  createGraph(req,FKuser_id,idGraph,res);
 };
 
-export async function findGraph(id_graph: number, versions: number, res: any): Promise< Map<string, Object>>{
+/**
+ * Funzione findGraph
+ * 
+ * Questa funzione prende il grafo dal database e lo converte in una Map secondo le specifiche 
+ * del package node-dijkstra
+ * 
+ * @param id_graph id del grafo da convertire
+ * @param versions versione del grafo
+ * @param res risposta da parte del server
+ * @returns grafo convertito
+ */
+export async function findGraph(id_graph: number, versions: number): Promise< Map<string, Object>>{
   let map2: Map<string, Object> = new Map();
   let nodi_testa= new Set;
   await Edge.findAll({attributes: ['node_a', 'node_b', 'weight_edge'], where: {FKid_graph: id_graph, versions: versions}}).then(arr => {
@@ -294,59 +428,87 @@ export async function findGraph(id_graph: number, versions: number, res: any): P
   return map2
 };
 
-export async function path(id_graph: number, versions: number, node_a: string, node_b: string, res: any): Promise<Array<any>>{
-  var start = new Date().getTime();
+/**
+ * Funzione decreaseToken
+ * 
+ * Questa funzione ha il compito di decrementare i token dell'utente che ha eseguito un modello
+ * 
+ * @param user_id id dell'utente
+ * @param costo costo di creazione del grafo
+ * @param res risposta da parte del server
+ * @returns Operazione effettuata o meno
+ */
+export async function decreaseToken(user_id: string, costo: number, res:any){
+  let result = []
+  await User.decrement({token: costo}, {where: {id_user: user_id}}).then( arr => {
+    (arr) ? result.push({'Hai pagato un totale di token ': costo})
+            : result.push({'Operazione non andata a buon fine. Token non decrementati': costo})
+  })
+  return result
+};
+
+/**
+ * Funzione path
+ * 
+ * Consente di eseguire il modello (specificando l’eventuale versione; di default si considera l’ultima disponibile),
+ * specificando start e goal
+ *  
+ * @param id_graph id del grafo da eseguire
+ * @param versions versione del grafo da eseguire
+ * @param node_a nodo start
+ * @param node_b nodo goal
+ * @param res risposta da parte del sistema
+ * @returns restituisce, sotto forma di JSON, il path, il relativo costo e il tempo impiegato per l'esecuzione
+ */
+export async function path(id_graph: number, versions: number, node_a: string, node_b: string, user_id: string, res: any): Promise<Array<any>>{
+  var start
   let ar = []
   let v
-
+  const c = await Graph.findAll({attributes: ["cost"], where: {id_graph: id_graph}}); 
   (!versions) ? v = await Max(id_graph) : v = versions
-  console.log(v)
-  await findGraph(id_graph, v, res).then( arr => {
+  await findGraph(id_graph, v).then( arr => {
     const route = new Graph1(Object.fromEntries(arr))
+    start = new Date().getTime();
     ar.push(route.path(node_a, node_b, {cost: true}))
-  })
+  }) 
   var end = new Date().getTime();
+  const b = await decreaseToken(user_id, c[0].getDataValue("cost"), res)
   ar.push({"timestamp" : String(Number(end - start) + " ms")})
+  ar.push(b)
  return ar
 };
-//calcolo numero nodi a partire dal grafo creato
-export async function n_nodi(req: any, res: any): Promise<number>{
-  let tot_node = new Set
+
+
+
+/**
+ * Funzione n_nodi
+ * 
+ * Calcola il numero di nodi a partire dal grafo che si vuole creare
+ * 
+ * @param req body contenente il grafo da creare
+ * @param res risposta da parte del server
+ * @returns numero dei nodi
+ */
+export async function n_nodi(req: any): Promise<number>{
+  let tot_node = new Set()
   await Edge.findAll({where: {FKid_graph: req}}).then(arr => {
     for (let i in arr){
     tot_node.add(arr[i].getDataValue("node_a"))
     tot_node.add(arr[i].getDataValue("node_b"))
     }
   })
-  //const array = Array.from(tot_node);
   console.log(tot_node)
   return tot_node.size
 };
 
-
-export async function n_edge(FKid_graph: any, res:any): Promise<number>{
-  let tot_edge = new Set
-  await Edge.findAll({where: {FKid_graph: FKid_graph}}).then(arr => {
-    for (let i in arr){
-      tot_edge.add(arr[i].getDataValue("id_edge"))
-    }
-  })
-  console.log(tot_edge)
-  return tot_edge.size
-};
-
-
-
-export async function cost(req: any, res: any): Promise<number>{
-  let cost: number
-  await Promise.all([n_nodi(req, res), n_edge(req, res)]).then(result => {
-    cost = (result[0]*0.25 + result[1]*0.01)
-  }) 
-  return cost
-};
-
-
-
+/**
+ * Funzione Max
+ * 
+ * Trova il valore massimo della versione di un dato grafo
+ * 
+ * @param id_graph id del grafo
+ * @returns valore massimo
+ */
 async function Max (id_graph: number): Promise<number>{
   const result = await sequelize.query(
     "SELECT MAX(versions) as max1 FROM edge where FKid_graph=" + id_graph,
@@ -358,20 +520,30 @@ async function Max (id_graph: number): Promise<number>{
   return Number(c.map(item => (item as any).max1)) 
 };
 
-export async function decreaseToken(user_id: string, costo: number, res:any){
-  await User.decrement({token: costo}, {where: {user_id: user_id}}).then( arr => {
-    res.json("Hai pagato un totale di  "+ costo + "token")
-  })
-
-}
-
-
+/**
+ * Funzione chargingAdmin
+ * 
+ * Consente ad un utente Admin di ricaricare il credito di un dato utente
+ * 
+ * @param email email dell'utente da ricaricare
+ * @param token quantita' da ricaricare
+ * @param res risposta da parte del server
+ */
 export async function chargingAdmin ( email: string, token: number, res: any ): Promise<any>{
   await User.increment({token: token}, {where: {email: email}}).then(arr => {
       res.json({"Effettuata ricarica di token": token});
   });
 };
 
+/**
+ * Funzione getInfo
+ * 
+ * Consente di trovare delle informazione come nodo testa, nodo coda e id e versione del grafo di appartenenza
+ * a partire dall'id di un arco
+ *   
+ * @param id_edge id del grafo
+ * @returns informazioni
+ */
 export async function getInfo(id_edge: number[]): Promise<any>{
   let array: Array<Object> = new Array
   for( let x of id_edge)  {
@@ -382,9 +554,27 @@ export async function getInfo(id_edge: number[]): Promise<any>{
   return array
 };
 
+/**
+ * Funzione simulationSeq
+ * 
+ * Permette di effettuare una simulazione che consenta di variare:
+ * - Peso relativo ad un arco specificando il valore di inizio, fine ed il passo di incremento
+ * - Peso relativo a più archi specificando per ogni arco il valore di inizio, fine ed il passo di incremento
+ * Nel caso di più archi le simulazioni sono sequenziali 
+ * 
+ * @param id_edge Array degli id degli archi di cui cambiare il peso
+ * @param start Array dei valori di partenza
+ * @param end Array dei valori di fine
+ * @param increment Array del passo di incremento
+ * @param node_a nodo start
+ * @param node_b nodo goal
+ * @param res risposta da parte del server
+ * @returns tutti i percorsi possibili con i relativi costi, specificando il best result in termini di costo
+ * e la relativa configurazione dei pesi
+ */
 export async function simulationSeq (id_edge: number[], start: number[], end: number[], increment: number[], node_a: string, node_b: string, res: any ): Promise<any>  {
   const ar = await getInfo(id_edge)
-  let map = await findGraph(ar[0][0].FKid_graph, ar[0][0].versions, res)
+  let map = await findGraph(ar[0][0].FKid_graph, ar[0][0].versions)
   let arr = []
   let arrg = []
   let b = []
@@ -412,9 +602,27 @@ return arr
 
 };
 
+/**
+ * Funzione SimulationPar
+ * 
+ * Permette di effettuare una simulazione che consenta di variare:
+ * - Peso relativo ad un arco specificando il valore di inizio, fine ed il passo di incremento
+ * - Peso relativo a più archi specificando per ogni arco il valore di inizio, fine ed il passo di incremento
+ * Nel caso di più archi le simulazioni sono parrallele 
+ * 
+ * @param id_edge Array degli id degli archi di cui cambiare il peso
+ * @param start Array dei valori di partenza
+ * @param end Array dei valori di fine
+ * @param increment Array del passo di incremento
+ * @param node_a nodo start
+ * @param node_b nodo goal
+ * @param res risposta da parte del server
+ * @returns tutti i percorsi possibili con i relativi costi, specificando il best result in termini di costo
+ * e la relativa configurazione dei pesi
+ */
 export async function SimulationPar (id_edge: number[], start: number[], end: number[], increment: number[], node_a: string, node_b: string, res: any ): Promise<Array<any>>  {
   const ar = await getInfo(id_edge)
-  let map = await findGraph(ar[0][0].FKid_graph, ar[0][0].versions, res)
+  let map = await findGraph(ar[0][0].FKid_graph, ar[0][0].versions)
   let arr = []
   let arrg = []
   let b = []
@@ -452,7 +660,3 @@ export async function SimulationPar (id_edge: number[], start: number[], end: nu
 
 return arr
 };
-
-
-
-

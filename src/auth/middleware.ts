@@ -24,8 +24,12 @@ export const jwtReq=[
 
 ];
 
-export const TokenParam = [
-    mid.checkTokenParam
+export const Token = [
+    mid.checkToken
+];
+
+export const TokenCreate = [
+    mid.checkTokenCreate
 ];
 
 export const GraphParam=[
@@ -37,6 +41,10 @@ export const GraphParam=[
 
 export const UserExistance = [
     mid.checkUserExistence
+];
+
+export const UserExistanceParam = [
+    mid.checkUserExistenceParam
 ];
 
 export const GraphExistance = [
@@ -61,4 +69,7 @@ export const creator = [
 
 export const Checkrange=[
     mid.checkARange
+];
+export const CheckPayload=[
+    authJwt.checkPayloadHeader,
 ]

@@ -1,7 +1,8 @@
 import * as jwt from "jsonwebtoken";
 import logger from "jet-logger";
 import { NextFunction, Request, Response } from "express";
-import * as Server from '../server'
+import * as Server from '../services/service'
+
 
 /**
  * Funzione checkToken

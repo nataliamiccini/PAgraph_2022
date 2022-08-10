@@ -12,7 +12,7 @@ function checkUserExistenceParam(req: any, res: any, next: any) {
     });
 };
 function checkCreatorExistence(req: any, res: any, next: any) {
-    Service.checkCrator(req.body.user_id, res).then((check) => {
+    Service.checkCreator(req.body.user_id, res).then((check) => {
     (check ) ? next() : res.status(500).json({"error": "User not found"});
     });
 };
@@ -29,8 +29,14 @@ function checkEdgeExistance(req: any, res: any, next: any) {
     });
 };
 
-function checkTokenParam(req: any, res: any, next: any) : void {
-    Service.checkToken(req.params['FKuser_id'], req, res).then((check) => {
+function checkToken(req: any, res: any, next: any) : void {
+    Service.checkToken(req.params['FKuser_id'], req.body.id_graph, res).then((check) => {
+    (check) ? next() : res.status(500).json({"error": "Tokens not enough"});
+    });
+};
+
+function checkTokenCreate(req: any, res: any, next: any) : void {
+    Service.checkTokenCreate(req.params['FKuser_id'], req.body, res).then((check) => {
     (check) ? next() : res.status(500).json({"error": "Tokens not enough"});
     });
 };
@@ -59,7 +65,8 @@ export default {
     checkUserExistenceParam,
     checkGraphExistence,
     checkEdgeExistance,
-    checkTokenParam,
+    checkToken,
+    checkTokenCreate,
     checkUser,
     checkARange,
     checkCreatorExistence,
