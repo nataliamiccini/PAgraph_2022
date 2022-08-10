@@ -46,6 +46,7 @@ Vengono riportati alcuni diagrammi delle sequenze per descrivere una sequenza di
 <img src = "img_src/createGraph.drawio.png">
 
 * **Chiamata POST /update/:FKuser_id :**
+<img src = "img_src/update.drawio.png">
 
 * **Chiamata GET /AcceptReq :**
 <img src = "img_src/.drawio.png">
