@@ -14,9 +14,9 @@ export class Singleton {
 	private connection: Sequelize;
 
     private constructor() {
-		this.connection = new Sequelize("GraphDB", "user", "root", {
-			host: "dbmysql",
-			port: 3306 ,
+		this.connection = new Sequelize(process.env.DB, process.env.USER, process.env.ROOT_PASS, {
+			host: process.env.HOST,
+			port: Number(process.env.PORT) ,
 			dialect: 'mysql'
 		});
 	}
