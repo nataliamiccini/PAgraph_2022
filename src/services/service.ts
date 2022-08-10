@@ -5,6 +5,7 @@ import { Model, Sequelize, where, QueryTypes } from 'sequelize';
 import { Singleton } from '../connection/Singleton';
 import {MapValue} from '../services/map'
 import {Req} from '../services/request'
+import {tot_cost} from './service-middleware'
 
 
 const Graph1 = require('node-dijkstra');
@@ -80,17 +81,17 @@ export function Reject(request_id:string,res:any){
  * @param res risposta da parte del server
  * @returns elenco delle revisioni
  */
-export async function VersionsList(date: Date, id_edge: string, FKid_graph: number, res: any): Promise<any> {
+export async function VersionsList(date: Date, id_edge: string, id_graph: number, res: any): Promise<any> {
   let a: any;
 
   if(!date && !id_edge){
-      a = await Edge.findAll({attributes: ["versions"], group: ['versions'], where: {FKid_graph: FKid_graph}});
+      a = await Edge.findAll({attributes: ["versions"], group: ['versions'], where: {FKid_graph: id_graph}});
   
   }else if(!date&& id_edge){
-      a = await Edge.findAll({attributes: ["versions"], group: ['versions'], where: {id_edge: id_edge, FKid_graph: FKid_graph} });
+      a = await Edge.findAll({attributes: ["versions"], group: ['versions'], where: {id_edge: id_edge, FKid_graph: id_graph} });
 
   }else if(!id_edge && date){
-      a = await Edge.findAll({attributes: ["versions"], group: ['versions'], where: {modify_date:date, FKid_graph: FKid_graph}});
+      a = await Edge.findAll({attributes: ["versions"], group: ['versions'], where: {modify_date:date, FKid_graph: id_graph}});
   }
   return a;
 };
@@ -312,51 +313,6 @@ export function createGraph (req: any, FKuser_id: any, FKid_graph: any, res: any
 }; 
 
 /**
- * Funzione updateE
- * 
- * Esegue l'update del numero totale degli archi nella tabella Graph
- */
-export async function updateE(){
-  let idGraph=await MaxidGraph()
-  let result = await sequelize.transaction(async (t) => {
-
-  let {count ,rows }= await Edge.findAndCountAll({where: {FKid_graph: idGraph}})
-
-  console.log("----- edge "+count)
-
-   Edge.update({tot_edge: count}, {where: {FKid_graph: idGraph}})
-
-  });
-};
-
-/**
- * Funzione updateN
- * 
- * Esegue l'update del numero totale dei nodi e del costo di creazione del grafo
- * 
- * @param req body contenente il grafo
- * @param FKuser_id id dell'utente che vuole effettuare l'update
- * @param res risposta da parte del server
- */
-export async function updateN(req: any, FKuser_id: string, res: any){
-  let idGraph=await MaxidGraph()
-  let result = await sequelize.transaction(async (t) => {
-    let tot_node= await n_nodi(idGraph);
-    let cost= await createGraph(req,FKuser_id,idGraph,res);
-    let {count ,rows }= await Edge.findAndCountAll({where: {FKid_graph: idGraph}})
-    await sequelize.query("UPDATE graph SET tot_node= "+tot_node+",tot_edge="+count+ " , cost="+cost+" WHERE id_graph="+idGraph,
-    {raw:true,
-      type:QueryTypes.RAW})
-    console.log("----- node "+tot_node)
-
-    User.decrement({token:cost},{where:{id_user:FKuser_id}}).then(arr=>{
-      res.json("Hai pagato un totale di  "+ cost + " token")
-    });
-  });
-
-};
-
-/**
  * Funzione MaxidGraph
  * 
  * Trova il valore massimo degli id dei grafi presenti nel database e viene usato per
@@ -392,9 +348,10 @@ console.log("max: ",max++)
  */
 export async function createTableGraph(req: any, FKuser_id: any, res: any){
   let idGraph=await MaxidGraph()
-  Graph.create({id_graph:idGraph, tot_node:0 ,tot_edge:0, cost:0})
-
+  let c= await tot_cost(req)
+  await Graph.create({id_graph:idGraph, tot_node:c[0].tot_node ,tot_edge:c[1].tot_edge, cost:c[2].cost})
   createGraph(req,FKuser_id,idGraph,res);
+  return c[2].cost
 };
 
 /**
@@ -530,9 +487,7 @@ async function Max (id_graph: number): Promise<number>{
  * @param res risposta da parte del server
  */
 export async function chargingAdmin ( email: string, token: number, res: any ): Promise<any>{
-  await User.increment({token: token}, {where: {email: email}}).then(arr => {
-      res.json({"Effettuata ricarica di token": token});
-  });
+  await User.increment({token: token}, {where: {email: email}})
 };
 
 /**

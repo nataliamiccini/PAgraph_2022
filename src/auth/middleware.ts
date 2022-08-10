@@ -35,8 +35,12 @@ export const TokenCreate = [
 export const GraphParam=[
     authJwt.checkPayloadHeader,
     mid.checkUserExistenceParam,
-    mid.checkGraphExistence
-    
+    mid.checkGraphExistence  
+];
+
+export const GraphCreate=[
+    authJwt.checkPayloadHeader,
+    mid.checkUserExistenceParam 
 ];
 
 export const UserExistance = [

@@ -69,7 +69,7 @@ export async function checkCreator ( FKuser_id: string, res: any): Promise<boole
  * @param res risposta da parte del sistema
  * @returns true se esiste, false altrimenti
  */
- export async function checkEdgeExistance ( id_edge: any, res: any): Promise<boolean> {
+ export async function checkEdgeExistance ( id_edge: string[], res: any): Promise<boolean> {
   let result
   let x=0;
   for (let i=0;i<id_edge.length;i++) {  
@@ -119,7 +119,7 @@ export async function checkTokenCreate ( id_user: string, req: any, res: any): P
   let result: any
   let t = await User.findAll({where: {id_user: id_user}, attributes: ["token"]});
   let c = await tot_cost(req)
-    if (t[0].getDataValue("token")>c){
+    if (t[0].getDataValue("token")>c[2].cost){
       result=true;
     }
     else {
@@ -186,22 +186,23 @@ export async function Range(start: any, end: any, increment: any, res: any): Pro
  * @param req body contenente il grafo da creare
  * @returns costo di creazione
  */
-export async function tot_cost(req: any) {
+export async function tot_cost(req: any): Promise<any> {
     let nodi = new Set()
     let edge = 0
+    let ar = []
     const keys = Object.keys(req);
-    let values =  Object.values(req)
     Object.getOwnPropertyNames(req).forEach( (x) => {
         nodi.add(x)
     })
-    console.log(nodi)
     for( var item in Array.from(nodi) ){
       Object.getOwnPropertyNames(req[keys[item]]).forEach( function (x) {
         nodi.add(x.toString());
-        edge+=1
-        
+        edge+=1 
       })
     }
     const cost = nodi.size*0.25+edge*0.01
-    return cost
+    ar.push({'tot_node': Number(nodi.size)})
+    ar.push({'tot_edge': edge})
+    ar.push({'cost': cost})
+    return ar
   }

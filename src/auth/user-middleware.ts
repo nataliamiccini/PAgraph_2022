@@ -24,9 +24,11 @@ function checkGraphExistence(req: any, res: any, next: any) {
 };
 
 function checkEdgeExistance(req: any, res: any, next: any) {
-    (Service.checkEdgeExistance(req.body.id_edge, res)).then((check) => {
-    (check) ? next() : res.status(500).json({"error": "Edge not found"});
-    });
+    if(req.body.id_edge){
+        (Service.checkEdgeExistance(req.body.id_edge, res)).then((check) => {
+            (check) ? next() : res.status(500).json({"error": "Edge not found"});
+        });
+    } else next()
 };
 
 function checkToken(req: any, res: any, next: any) : void {

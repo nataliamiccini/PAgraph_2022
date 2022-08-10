@@ -41,12 +41,13 @@ INSERT INTO user (id_user,email, name, surname,  role, token) VALUES
   ('Wos78BnB09', 'chiara@gmail.com', 'Chiara', 'Cucchi', 'user', 100),
   ('4p0KF0xkOi', 'francesco@gmail.com', 'Francesco', 'Rossi', 'user', 200),
   ('2Zbo_lX4d5', 'alessandro@gmail.com', 'Alessandro', 'Passarini', 'admin', 300),
-  ('nzRH41T5sz', 'natalia@gmail.com', 'Natalia', 'Miccini', 'admin', 100);
+  ('nzRH41T5sz', 'natalia@gmail.com', 'Natalia', 'Miccini', 'admin', 100),
+  ('nf8H41T5sz', 'emily@gmail.com', 'Emily', 'Farrago', 'admin', 0);
 
   
 INSERT INTO graph (id_graph, tot_node, tot_edge, cost) VALUES
-  (1, 5, 10, 1.35),
-  (2, 4, 8, 1.08);
+  (1, 10, 22, 2.72),
+  (2, 10, 22, 2.72);
 
 INSERT INTO edge (id_edge, node_a, node_b, versions, weight_edge, modify_date, FKuser_id, FKid_graph) VALUES
   ('0.a16l7ifc5q', 'A', 'B', 1, 3, '2022-07-31T15:40:00+01:00', "T06x323aWb", 1),

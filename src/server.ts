@@ -1,9 +1,4 @@
 import * as express from 'express';
-import * as Service from './services/service'
-import {Req} from './services/request'
-import {MapValue} from './services/map'
-import { Request } from "express"
-import * as middleware from './auth/middleware';
 import logger from 'jet-logger';
 import apiRouterJWT from './routes/api-jwt'
 import apiRouter from './routes/api'
