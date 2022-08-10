@@ -1,0 +1,3244 @@
+{
+	"info": {
+		"_postman_id": "f7bf5248-e1f6-4baf-9bb4-f9260a64ed43",
+		"name": "graph",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8773416"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/createGraph/T06x323aWb",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"B\": {\n    \"A\": 4,\n    \"C\": 3\n  },\n  \"C\":{\n      \"D\":1\n  },\n  \"D\": {\n      \"K\":3\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/createGraph/T06x323aWb",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"createGraph",
+						"T06x323aWb"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "http://localhost:8080/createGraph/T06x323aWb",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"B\": {\n    \"A\": 4,\n    \"C\": 3\n  },\n  \"C\":{\n      \"D\":1\n  },\n  \"D\": {\n      \"K\":3\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/createGraph/T06x323aWb",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"createGraph",
+								"T06x323aWb"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "68"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"44-/aA0RxZoy+Xwybwm+PT9nkfIyVk\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 17:47:03 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Bene! Il Grafo è stato creato.\",\n    \"hai perso token\": 1.29\n}"
+				},
+				{
+					"name": "http://localhost:8080/createGraph/T06x323aWb",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/createGraph/T06x323aWb",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"createGraph",
+								"T06x323aWb"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "22"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"16-wEPyzm+tkBJEvMq4gXQn4ZEe2to\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 20:16:34 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"No Payload\"\n}"
+				},
+				{
+					"name": "http://localhost:8080/createGraph/T06x323aWb",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"B\": {\n    \"A\": 4,\n    \"C\": 3\n  },\n  \"C\":{\n      \"D\":1\n  },\n  \"D\": {\n      \"K\":3\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/createGraph/T06x323",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"createGraph",
+								"T06x323"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "26"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1a-hq/hT0ORGTkTfyRpVCZ/JB/r8Eg\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 20:17:07 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"User not found\"\n}"
+				},
+				{
+					"name": "http://localhost:8080/createGraph/T06x323aWb",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"B\": {\n    \"A\": 4,\n    \"C\": 3\n  },\n  \"C\":{\n      \"D\":1\n  },\n  \"D\": {\n      \"K\":3\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/createGraph/nf8H41T5sz",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"createGraph",
+								"nf8H41T5sz"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "29"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1d-7pi69HUQuJ3bgMZL5XX4wgv7lto\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 20:19:16 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Tokens not enough\"\n}"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:8080/update/Wos78BnB09",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"new_weight\":6,\n    \"id_edge\":[\"0.1r6aam856k\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/apiJWT/update/Wos78BnB09",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"apiJWT",
+						"update",
+						"Wos78BnB09"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "http://localhost:8080/update/Wos78BnB09",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"new_weight\":5,\n    \"id_edge\":[\"0.KI8am856k\",\"0.1r6aam856k\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/apiJWT/update/Wos78BnB09",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiJWT",
+								"update",
+								"Wos78BnB09"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "32"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"20-XLgXha6wggn2sl7dbE4N0hyhcAQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 17:48:07 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "\"la richiesta è stata aggiunta\""
+				},
+				{
+					"name": "http://localhost:8080/update/Wos78BnB09",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/apiJWT/update/Wos78BnB09",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiJWT",
+								"update",
+								"Wos78BnB09"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "22"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"16-wEPyzm+tkBJEvMq4gXQn4ZEe2to\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 20:19:59 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"No Payload\"\n}"
+				},
+				{
+					"name": "http://localhost:8080/update/Wos78BnB09",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"new_weight\":6,\n    \"id_edge\":[\"0.1r6aam856k\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/apiJWT/update/A",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiJWT",
+								"update",
+								"A"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "26"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1a-hq/hT0ORGTkTfyRpVCZ/JB/r8Eg\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 20:20:33 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"User not found\"\n}"
+				},
+				{
+					"name": "http://localhost:8080/update/Wos78BnB09",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"new_weight\":6,\n    \"id_edge\":[\"fbbbg\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/apiJWT/update/Wos78BnB09",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiJWT",
+								"update",
+								"Wos78BnB09"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "26"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1a-WiHHHffN95fURhuryc3ZyRYj3To\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 20:21:06 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Edge not found\"\n}"
+				},
+				{
+					"name": "http://localhost:8080/update/Wos78BnB09",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"new_weight\":6,\n    \"id_edge\":[\"fbbbg\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/apiJWT/update/Wos78BnB09",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiJWT",
+								"update",
+								"Wos78BnB09"
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "23"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"17-cXnuMOEupiX9brMy8TXgOB4WVVo\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 20:23:01 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"invalid KEY\"\n}"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:8080/showRequest",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\":\"Wos78BnB09\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/showRequest",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"showRequest"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "http://localhost:8080/showRequest",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\":\"Wos78BnB09\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/showRequest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"showRequest"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "222"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"de-mqDv+Moq1inXJYRcCfpwjmhcOWs\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 17:51:14 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"requests\": [\n        {\n            \"weight\": 5,\n            \"edge_id\": [\n                \"0.KI8am856k\",\n                \"0.1r6aam856k\"\n            ],\n            \"request_id\": \"866d\"\n        },\n        {\n            \"weight\": 9,\n            \"edge_id\": [\n                \"0.KI8am856k\",\n                \"0.1r6aam856k\"\n            ],\n            \"request_id\": \"c4a4\"\n        },\n        {\n            \"weight\": 6,\n            \"edge_id\": [\n                \"0.1r6aam856k\"\n            ],\n            \"request_id\": \"99cc\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "http://localhost:8080/showRequest",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\":\"Wo8BnB09\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/showRequest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"showRequest"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "26"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1a-hq/hT0ORGTkTfyRpVCZ/JB/r8Eg\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 20:26:11 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"User not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:8080/rejectReq",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\":\"Wos78BnB09\",\n    \"request_id\" :\"767f\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/rejectReq",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rejectReq"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "http://localhost:8080/rejectReq",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\":\"Wos78BnB09\",\n    \"request_id\" :\"767f\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/rejectReq",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"rejectReq"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "39"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"27-zSAOtjffVp+aexlGaT9Uwb7r7tU\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 17:49:22 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "\"é stata eliminata la richiesta: 767f\""
+				},
+				{
+					"name": "http://localhost:8080/rejectReq",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\":\"Wos7nB09\",\n    \"request_id\" :\"767f\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/rejectReq",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"rejectReq"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "26"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1a-hq/hT0ORGTkTfyRpVCZ/JB/r8Eg\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 20:35:33 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"User not found\"\n}"
+				},
+				{
+					"name": "http://localhost:8080/rejectReq",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\":\"nf8H41T5sz\",\n    \"request_id\" :\"767f\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/rejectReq",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"rejectReq"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "24"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"18-XPDV80vbMk4yY1/PADG4jYM4rSI\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 21:29:15 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Unauthorized\"\n}"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:8080/AcceptReq",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\":\"Wos78BnB09\",\n    \"request_id\": \"866d\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/AcceptReq",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"AcceptReq"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "http://localhost:8080/AcceptReq",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\":\"Wos78BnB09\",\n    \"request_id\": \"866d\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/AcceptReq",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"AcceptReq"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "39"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"27-XgMUdLfnj58oI7EiJkS/VIhqWpc\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 17:55:36 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "\"é stata accettata la richiesta: 866d\""
+				}
+			]
+		},
+		{
+			"name": "http://localhost:8080/update/Wos78BnB09",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiV29zNzhCbkIwOSJ9.2xHcwHk5b2RFjt_Yq5aM5RyNJP73B4GgLcFpdpor2lU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"new_weight\":5,\n    \"id_edge\":[\"0.a16l7ifc5q\",\"0.a16l7ifc5d\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/apiJWT/update/Wos78BnB09",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"apiJWT",
+						"update",
+						"Wos78BnB09"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "http://localhost:8080/update/Wos78BnB09",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"new_weight\":5,\n    \"id_edge\":[\"0.a16l7ifc5q\",\"0.a16l7ifc5d\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/apiJWT/update/Wos78BnB09",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiJWT",
+								"update",
+								"Wos78BnB09"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "32"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"20-yCFcRbQGXaZvrTXX8Mnn5tmlZTI\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 17:56:02 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "\"Il modello è stato aggiornato\""
+				},
+				{
+					"name": "http://localhost:8080/update/Wos78BnB09",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"new_weight\":5,\n    \"id_edge\":[\"0.a16l7ifc5q\",\"0.a16l7ifc5d\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/apiJWT/update/Wos78BnB09",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiJWT",
+								"update",
+								"Wos78BnB09"
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "23"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"17-cXnuMOEupiX9brMy8TXgOB4WVVo\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 20:37:22 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"invalid KEY\"\n}"
+				},
+				{
+					"name": "http://localhost:8080/update/Wos78BnB09",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"new_weight\":5,\n    \"id_edge\":[\"0.a16l7ifc5q\",\"0.a16l7ifc5d\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/apiJWT/update/Wos78BnB",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiJWT",
+								"update",
+								"Wos78BnB"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "26"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1a-hq/hT0ORGTkTfyRpVCZ/JB/r8Eg\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 20:38:00 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"User not found\"\n}"
+				},
+				{
+					"name": "http://localhost:8080/update/Wos78BnB09",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"new_weight\":5,\n    \"id_edge\":[\"0.a16l7ifc5q\",\"0.a16l7ifc5d\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/apiJWT/update/nf8H41T5sz",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiJWT",
+								"update",
+								"nf8H41T5sz"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "24"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"18-XPDV80vbMk4yY1/PADG4jYM4rSI\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 21:43:01 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Unauthorized\"\n}"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:8080/modelList",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n     \"date\":\"2022-08-04T13:00:00+01:00\"\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/modelList",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"modelList"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "http://localhost:8080/modelList",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"id_edge\":[\"0.a16l7ifc5d\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/modelList",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"modelList"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "33"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"21-JgKb5hQLNaMkvkOhkGfKlW0ESq0\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 19:42:48 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    1,\n    [\n        {\n            \"version\": 1\n        },\n        {\n            \"version\": 2\n        }\n    ]\n]"
+				},
+				{
+					"name": "http://localhost:8080/modelList",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"id_edge\":[\"0.a16l5d\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/modelList",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"modelList"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "26"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1a-WiHHHffN95fURhuryc3ZyRYj3To\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 20:45:48 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Edge not found\"\n}"
+				},
+				{
+					"name": "http://localhost:8080/modelList",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n     \"date\":\"2022-08-04T13:00:00+01:00\"\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/modelList",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"modelList"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "61"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"3d-brR9CQoVJ9HcjifazlAt/8K/xOw\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 19:43:16 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    2,\n    [\n        {\n            \"version\": 4\n        },\n        {\n            \"version\": 3\n        },\n        {\n            \"version\": 1\n        },\n        {\n            \"version\": 2\n        }\n    ]\n]"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:8080/versionsList",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id_graph\": 15\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/versionsList",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"versionsList"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "http://localhost:8080/versionsList",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id_graph\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/versionsList",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"versionsList"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "31"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1f-RwTSha3CA+RK/DRagfV8fXsyeGo\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 20:47:02 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"versions\": 1\n    },\n    {\n        \"versions\": 2\n    }\n]"
+				},
+				{
+					"name": "http://localhost:8080/versionsList",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"id_graph\": 2,\n     \"id_edge\": [\"0.14a073k\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/versionsList",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"versionsList"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "26"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1a-WiHHHffN95fURhuryc3ZyRYj3To\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 20:47:56 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Edge not found\"\n}"
+				},
+				{
+					"name": "http://localhost:8080/versionsList",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"id_graph\": 2,\n     \"date\":\"2022-08-04T13:00:00+01:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/versionsList",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"versionsList"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "31"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1f-RwTSha3CA+RK/DRagfV8fXsyeGo\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 20:01:14 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"versions\": 1\n    },\n    {\n        \"versions\": 2\n    }\n]"
+				},
+				{
+					"name": "http://localhost:8080/versionsList",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"id_graph\": 2,\n     \"id_edge\": [\"0.146lnqa073k\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/versionsList",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"versionsList"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "16"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"10-yWddzGe7KdbOQHgNY9P2CwFKRSk\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 20:00:26 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"versions\": 1\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:8080/filter",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"num_archi\":22\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/filter",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"filter"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "http://localhost:8080/filter",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"num_nodi\":10,\n    \"num_archi\":22\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/filter",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"filter"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "31"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1f-WPX1S4xY3btlpwU//NrdJ3bylqw\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 20:11:16 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id_graph\": 1\n    },\n    {\n        \"id_graph\": 2\n    }\n]"
+				},
+				{
+					"name": "http://localhost:8080/filter",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"num_nodi\":10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/filter",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"filter"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "59"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"3b-1gWyRMog24ps/qetA6CINMxOnxQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 20:12:00 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id_graph\": 1,\n        \"tot_edge\": 22\n    },\n    {\n        \"id_graph\": 2,\n        \"tot_edge\": 22\n    }\n]"
+				},
+				{
+					"name": "http://localhost:8080/filter",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"num_archi\":22\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/filter",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"filter"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "59"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"3b-JDUrVkguIrqIS2PiuzQ1PXXPRAM\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 20:12:15 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id_graph\": 1,\n        \"tot_node\": 10\n    },\n    {\n        \"id_graph\": 2,\n        \"tot_node\": 10\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:8080/charging",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoibnpSSDQxVDVzeiIsIm1haWwiOiJjaGlhcmFAZ21haWwuY29tIiwidG9rZW4iOjUwfQ.LshivSo4bN2_O--FLnh_1KG5dy3wHlf0ltLcFvHv3o4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/apiJWT/charging",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"apiJWT",
+						"charging"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "http://localhost:8080/charging",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/apiJWT/charging",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiJWT",
+								"charging"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "65"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"41-Pt0lhkCrnneT5WUmW4zWyWiUWCA\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 20:12:40 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Bene! E' stata effettuata una ricarica di token: 50\"\n}"
+				},
+				{
+					"name": "http://localhost:8080/charging",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/apiJWT/charging",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apiJWT",
+								"charging"
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "23"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"17-cXnuMOEupiX9brMy8TXgOB4WVVo\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 20:50:27 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"invalid KEY\"\n}"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:8080/sim",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n     \"id_edge\":[\"0.146lnqasp3k\",\"0.1smonqa073k\"],\n     \"start\":[2,1],\n     \"end\":[12,5],\n     \"increment\":[2,1],\n     \"node_a\":\"A\",\n     \"node_b\":\"D\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/sim-seq",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"sim-seq"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "http://localhost:8080/sim",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n     \"id_edge\":[\"0.146lnqasp3k\",\"0.1smonqa073k\"],\n     \"start\":[2,1],\n     \"end\":[12,5],\n     \"increment\":[2,1],\n     \"node_a\":\"A\",\n     \"node_b\":\"D\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/sim-seq",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sim-seq"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "635"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"27b-Ykq8LEEXllbGXgbT+JbuynsgKA8\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 21:34:02 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"path\": [\n            \"A\",\n            \"C\",\n            \"D\"\n        ],\n        \"cost\": 6\n    },\n    {\n        \"path\": [\n            \"A\",\n            \"C\",\n            \"D\"\n        ],\n        \"cost\": 8\n    },\n    {\n        \"path\": [\n            \"A\",\n            \"B\",\n            \"D\"\n        ],\n        \"cost\": 9\n    },\n    {\n        \"path\": [\n            \"A\",\n            \"B\",\n            \"D\"\n        ],\n        \"cost\": 9\n    },\n    {\n        \"path\": [\n            \"A\",\n            \"B\",\n            \"D\"\n        ],\n        \"cost\": 9\n    },\n    {\n        \"path\": [\n            \"A\",\n            \"B\",\n            \"D\"\n        ],\n        \"cost\": 9\n    },\n    {\n        \"path\": [\n            \"A\",\n            \"B\",\n            \"D\"\n        ],\n        \"cost\": 3\n    },\n    {\n        \"path\": [\n            \"A\",\n            \"B\",\n            \"D\"\n        ],\n        \"cost\": 4\n    },\n    {\n        \"path\": [\n            \"A\",\n            \"B\",\n            \"D\"\n        ],\n        \"cost\": 5\n    },\n    {\n        \"path\": [\n            \"A\",\n            \"B\",\n            \"D\"\n        ],\n        \"cost\": 6\n    },\n    {\n        \"path\": [\n            \"A\",\n            \"B\",\n            \"D\"\n        ],\n        \"cost\": 7\n    },\n    {\n        \"The best result costs: \": 3\n    },\n    {\n        \"The best result is obtained with the follow graph: \": {\n            \"D\": {\n                \"C\": 4,\n                \"B\": 7,\n                \"H\": 8\n            },\n            \"A\": {\n                \"B\": 2,\n                \"C\": 12\n            },\n            \"C\": {\n                \"D\": 4,\n                \"A\": 5,\n                \"E\": 3\n            },\n            \"L\": {\n                \"G\": 2\n            },\n            \"H\": {\n                \"G\": 6,\n                \"D\": 4\n            },\n            \"F\": {\n                \"E\": 1,\n                \"G\": 5,\n                \"I\": 3\n            },\n            \"E\": {\n                \"C\": 2,\n                \"F\": 1\n            },\n            \"B\": {\n                \"D\": 1,\n                \"A\": 2\n            },\n            \"G\": {\n                \"L\": 11,\n                \"F\": 3,\n                \"H\": 4\n            },\n            \"I\": {\n                \"F\": 3\n            }\n        }\n    }\n]"
+				},
+				{
+					"name": "http://localhost:8080/sim",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n     \"id_edge\":[\"0.146lnqasp3k\"],\n     \"start\":[2],\n     \"end\":[12],\n     \"increment\":[2],\n     \"node_a\":\"A\",\n     \"node_b\":\"D\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/sim-seq",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sim-seq"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "474"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1da-LzomDS00dF7BO5abbLREUExQDS0\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 21:35:28 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"path\": [\n            \"A\",\n            \"C\",\n            \"D\"\n        ],\n        \"cost\": 6\n    },\n    {\n        \"path\": [\n            \"A\",\n            \"C\",\n            \"D\"\n        ],\n        \"cost\": 8\n    },\n    {\n        \"path\": [\n            \"A\",\n            \"B\",\n            \"D\"\n        ],\n        \"cost\": 9\n    },\n    {\n        \"path\": [\n            \"A\",\n            \"B\",\n            \"D\"\n        ],\n        \"cost\": 9\n    },\n    {\n        \"path\": [\n            \"A\",\n            \"B\",\n            \"D\"\n        ],\n        \"cost\": 9\n    },\n    {\n        \"path\": [\n            \"A\",\n            \"B\",\n            \"D\"\n        ],\n        \"cost\": 9\n    },\n    {\n        \"The best result costs: \": 6\n    },\n    {\n        \"The best result is obtained with the follow graph: \": {\n            \"D\": {\n                \"C\": 4,\n                \"B\": 7,\n                \"H\": 8\n            },\n            \"A\": {\n                \"B\": 2,\n                \"C\": 2\n            },\n            \"C\": {\n                \"D\": 4,\n                \"A\": 5,\n                \"E\": 3\n            },\n            \"L\": {\n                \"G\": 2\n            },\n            \"H\": {\n                \"G\": 6,\n                \"D\": 4\n            },\n            \"F\": {\n                \"E\": 1,\n                \"G\": 5,\n                \"I\": 3\n            },\n            \"E\": {\n                \"C\": 2,\n                \"F\": 1\n            },\n            \"B\": {\n                \"D\": 7,\n                \"A\": 2\n            },\n            \"G\": {\n                \"L\": 11,\n                \"F\": 3,\n                \"H\": 4\n            },\n            \"I\": {\n                \"F\": 3\n            }\n        }\n    }\n]"
+				},
+				{
+					"name": "http://localhost:8080/sim",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n     \"id_edge\":[\"0.146lnqasp3k\"],\n     \"start\":[2],\n     \"end\":[12],\n     \"increment\":[2],\n     \"node_a\":\"A\",\n     \"node_b\":\"D\",\n     \"versions\":2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/sim-seq",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sim-seq"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "474"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1da-LzomDS00dF7BO5abbLREUExQDS0\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 21:36:11 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"path\": [\n            \"A\",\n            \"C\",\n            \"D\"\n        ],\n        \"cost\": 6\n    },\n    {\n        \"path\": [\n            \"A\",\n            \"C\",\n            \"D\"\n        ],\n        \"cost\": 8\n    },\n    {\n        \"path\": [\n            \"A\",\n            \"B\",\n            \"D\"\n        ],\n        \"cost\": 9\n    },\n    {\n        \"path\": [\n            \"A\",\n            \"B\",\n            \"D\"\n        ],\n        \"cost\": 9\n    },\n    {\n        \"path\": [\n            \"A\",\n            \"B\",\n            \"D\"\n        ],\n        \"cost\": 9\n    },\n    {\n        \"path\": [\n            \"A\",\n            \"B\",\n            \"D\"\n        ],\n        \"cost\": 9\n    },\n    {\n        \"The best result costs: \": 6\n    },\n    {\n        \"The best result is obtained with the follow graph: \": {\n            \"D\": {\n                \"C\": 4,\n                \"B\": 7,\n                \"H\": 8\n            },\n            \"A\": {\n                \"B\": 2,\n                \"C\": 2\n            },\n            \"C\": {\n                \"D\": 4,\n                \"A\": 5,\n                \"E\": 3\n            },\n            \"L\": {\n                \"G\": 2\n            },\n            \"H\": {\n                \"G\": 6,\n                \"D\": 4\n            },\n            \"F\": {\n                \"E\": 1,\n                \"G\": 5,\n                \"I\": 3\n            },\n            \"E\": {\n                \"C\": 2,\n                \"F\": 1\n            },\n            \"B\": {\n                \"D\": 7,\n                \"A\": 2\n            },\n            \"G\": {\n                \"L\": 11,\n                \"F\": 3,\n                \"H\": 4\n            },\n            \"I\": {\n                \"F\": 3\n            }\n        }\n    }\n]"
+				},
+				{
+					"name": "http://localhost:8080/sim",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n     \"id_edge\":[\"0.146lnqasp3k\",\"0.1smonqa073k\"],\n     \"start\":[2,1],\n     \"end\":[2,5],\n     \"increment\":[2,1],\n     \"node_a\":\"A\",\n     \"node_b\":\"D\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/sim-seq",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sim-seq"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "27"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1b-CLtyNyD+Gx+YNayqvhyE5zXtk5I\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 21:38:36 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Range not valid\"\n}"
+				},
+				{
+					"name": "http://localhost:8080/sim",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n     \"id_edge\":[\"0.146lnqasp3k\",\"0.1smonqa073k\"],\n     \"start\":[10,1],\n     \"end\":[2,5],\n     \"increment\":[2,1],\n     \"node_a\":\"A\",\n     \"node_b\":\"D\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/sim-seq",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sim-seq"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "27"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1b-CLtyNyD+Gx+YNayqvhyE5zXtk5I\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 21:38:51 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Range not valid\"\n}"
+				},
+				{
+					"name": "http://localhost:8080/sim",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n     \"id_edge\":[\"0.146lnqasp3k\",\"0.1smonqa073k\"],\n     \"start\":[-1,1],\n     \"end\":[20,5],\n     \"increment\":[2,1],\n     \"node_a\":\"A\",\n     \"node_b\":\"D\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/sim-seq",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sim-seq"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "27"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1b-CLtyNyD+Gx+YNayqvhyE5zXtk5I\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 21:39:11 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Range not valid\"\n}"
+				},
+				{
+					"name": "http://localhost:8080/sim",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n     \"id_edge\":[\"0.146lnqasp3k\",\"0.1smonqa073k\"],\n     \"start\":[1,1],\n     \"end\":[20,5],\n     \"increment\":[2,0],\n     \"node_a\":\"A\",\n     \"node_b\":\"D\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/sim-seq",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sim-seq"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "27"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1b-CLtyNyD+Gx+YNayqvhyE5zXtk5I\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 21:39:28 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Range not valid\"\n}"
+				},
+				{
+					"name": "http://localhost:8080/sim",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n     \"id_edge\":[\"0.146asp3k\",\"0.1smonqa073k\"],\n     \"start\":[1,1],\n     \"end\":[20,5],\n     \"increment\":[2,0],\n     \"node_a\":\"A\",\n     \"node_b\":\"D\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/sim-seq",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sim-seq"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "26"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1a-WiHHHffN95fURhuryc3ZyRYj3To\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 21:39:43 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Edge not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:8080/sim-par",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n     \"id_edge\":[\"0.146lnqasp3k\",\"0.1smonqa073k\"],\n     \"start\":[2,1],\n     \"end\":[12,5],\n     \"increment\":[2,1],\n     \"node_a\":\"A\",\n     \"node_b\":\"D\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/sim-par",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sim-par"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "http://localhost:8080/sim-par",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n     \"id_edge\":[\"0.146lnqasp3k\",\"0.1smonqa073k\"],\n     \"start\":[2,1],\n     \"end\":[12,5],\n     \"increment\":[2,1],\n     \"node_a\":\"A\",\n     \"node_b\":\"D\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/sim-par",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sim-par"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "474"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1da-KOrR189T054YgmMxPyvMOxWxXBs\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 21:40:26 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"path\": [\n            \"A\",\n            \"B\",\n            \"D\"\n        ],\n        \"cost\": 3\n    },\n    {\n        \"path\": [\n            \"A\",\n            \"B\",\n            \"D\"\n        ],\n        \"cost\": 4\n    },\n    {\n        \"path\": [\n            \"A\",\n            \"B\",\n            \"D\"\n        ],\n        \"cost\": 5\n    },\n    {\n        \"path\": [\n            \"A\",\n            \"B\",\n            \"D\"\n        ],\n        \"cost\": 6\n    },\n    {\n        \"path\": [\n            \"A\",\n            \"B\",\n            \"D\"\n        ],\n        \"cost\": 7\n    },\n    {\n        \"path\": [\n            \"A\",\n            \"B\",\n            \"D\"\n        ],\n        \"cost\": 7\n    },\n    {\n        \"The best result costs: \": 3\n    },\n    {\n        \"The best result is obtained with the follow graph: \": {\n            \"D\": {\n                \"C\": 4,\n                \"B\": 7,\n                \"H\": 8\n            },\n            \"A\": {\n                \"B\": 2,\n                \"C\": 2\n            },\n            \"C\": {\n                \"D\": 4,\n                \"A\": 5,\n                \"E\": 3\n            },\n            \"L\": {\n                \"G\": 2\n            },\n            \"H\": {\n                \"G\": 6,\n                \"D\": 4\n            },\n            \"F\": {\n                \"E\": 1,\n                \"G\": 5,\n                \"I\": 3\n            },\n            \"E\": {\n                \"C\": 2,\n                \"F\": 1\n            },\n            \"B\": {\n                \"D\": 1,\n                \"A\": 2\n            },\n            \"G\": {\n                \"L\": 11,\n                \"F\": 3,\n                \"H\": 4\n            },\n            \"I\": {\n                \"F\": 3\n            }\n        }\n    }\n]"
+				},
+				{
+					"name": "http://localhost:8080/sim-par",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n     \"id_edge\":[\"0.146lnqasp3k\",\"0.1smonqa073k\"],\n     \"start\":[2,1],\n     \"end\":[5,1],\n     \"increment\":[1,1],\n     \"node_a\":\"D\",\n     \"node_b\":\"C\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/sim-par",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sim-par"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "27"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1b-CLtyNyD+Gx+YNayqvhyE5zXtk5I\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 21:41:03 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Range not valid\"\n}"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:8080/path/T06x323aWb",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n    \"id_graph\":1,\n    \"version\":1,\n    \"node_a\":\"A\",\n    \"node_b\":\"B\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/path/T06x323aWb",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"path",
+						"T06x323aWb"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "http://localhost:8080/path/T06x323aWb",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n    \"id_graph\":1,\n    \"versions\":1,\n    \"node_a\":\"A\",\n    \"node_b\":\"B\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/path/T06x323aWb",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"path",
+								"T06x323aWb"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "97"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"61-JkQEHPjTUhCPtCu5cBquVdgWC40\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 22:07:48 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"path\": [\n            \"A\",\n            \"B\"\n        ],\n        \"cost\": 3\n    },\n    {\n        \"timestamp\": \"0 ms\"\n    },\n    [\n        {\n            \"Hai pagato un totale di token \": \"1.35000\"\n        }\n    ]\n]"
+				},
+				{
+					"name": "http://localhost:8080/path/T06x323aWb",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n    \"id_graph\":1,\n    \"node_a\":\"A\",\n    \"node_b\":\"B\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/path/T06x323aWb",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"path",
+								"T06x323aWb"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "97"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"61-K912sUHQgXx+eGiWSv8XGyV5W7Q\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 22:47:00 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"path\": [\n            \"A\",\n            \"B\"\n        ],\n        \"cost\": 3\n    },\n    {\n        \"timestamp\": \"2 ms\"\n    },\n    [\n        {\n            \"Hai pagato un totale di token \": \"1.35000\"\n        }\n    ]\n]"
+				},
+				{
+					"name": "http://localhost:8080/path/T06x323aWb",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n    \"id_graph\":1,\n    \"node_a\":\"A\",\n    \"node_b\":\"E\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/path/nf8H41T5sz",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"path",
+								"nf8H41T5sz"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "24"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"18-XPDV80vbMk4yY1/PADG4jYM4rSI\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 10 Aug 2022 23:00:39 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Unauthorized\"\n}"
+				}
+			]
+		}
+	]
+}
