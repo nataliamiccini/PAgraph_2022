@@ -30,21 +30,20 @@ export function ShowReq(res:any){
 }
 
 export function Reject(request_id:string,res:any){
-  console.log("-----")
   let x = JSON.stringify(map);
   let y = JSON.parse(x);
-  console.log("++++++++++++++++",y)
+
   for (let key in y) {
     if (y.hasOwnProperty(key)) {
       let z=y[key];
       let l=Object.values(z);
-      console.log("++++++++++++++++",l)
+
       l.forEach(function(x){
        if (x["request_id"]===request_id) 
         {res.json("é stata eliminata la richiesta: "+request_id);
         let index= l.indexOf(x);
         map.pop(index);} else{res.json("Richiesta non trovata")}
-            
+
       })
     }
   }
@@ -55,8 +54,11 @@ export function Reject(request_id:string,res:any){
 
   for (let key in y) {
     if (y.hasOwnProperty(key)) {
+      
       let z=y[key];
+     
       let l=Object.values(z);
+      
       l.forEach(function(x){
        if (x["request_id"]===request_id) 
         {res.json("é stata accettata la richiesta: "+request_id);
@@ -422,9 +424,14 @@ export async function path(id_graph: number, versions: number, node_a: string, n
   let ar = []
   let v
   const c = await Graph.findAll({attributes: ["cost"], where: {id_graph: id_graph}}); 
-  (!versions) ? v = await Max(id_graph) : v = versions
+  const max= await Max(id_graph);
+  console.log(max);
+  (!versions) ? v = max : v = versions
   await findGraph(id_graph, v).then( arr => {
+    console.log(arr)
+    console.log(Object.fromEntries(arr))
     const route = new Graph1(Object.fromEntries(arr))
+    console.log(route)
     start = new Date().getTime();
     ar.push(route.path(node_a, node_b, {cost: true}))
   }) 
@@ -469,11 +476,12 @@ export async function n_nodi(req: any): Promise<number>{
 async function Max (id_graph: number): Promise<number>{
   const result = await sequelize.query(
     "SELECT MAX(versions) as max1 FROM edge where FKid_graph=" + id_graph,
-    {
+    { raw: true,
       type: QueryTypes.SELECT
     }
   )
   const c = (Object.values(result))
+  console.log(c.map(item => (item as any).max1))
   return Number(c.map(item => (item as any).max1)) 
 };
 
