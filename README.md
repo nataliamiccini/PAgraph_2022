@@ -48,23 +48,11 @@ Vengono riportati alcuni diagrammi delle sequenze per descrivere una sequenza di
 * **Chiamata POST /update/:FKuser_id :**
 <img src = "img_src/update.drawio.png">
 
-* **Chiamata GET /AcceptReq :**
-<img src = "img_src/.drawio.png">
-
-* **Chiamata GET /rejectReq :**
-<img src = "img_src/.drawio.png">
-
-* **Chiamata GET /path/:FKuser_id :**
-<img src = "img_src/.drawio.png">
+* **Chiamate GET /ShowRequest, GET /AcceptReq, GET /rejectReq :**
+<img src = "img_src/request.drawio.png">
 
 * **Chiamata GET /sim-par :**
-<img src = "img_src/.drawio.png">
-
-* **Chiamata GET /sim-seq :**
-<img src = "img_src/.drawio.png">
-
-* **Chiamata POST /charging :**
-<img src = "img_src/charging.drawio.png">
+<img src = "img_src/simulation.drawio.png">
 
 ### Pattern utilizzati
 * **Singleton**, un modello di Creational Design Pattern che garantisce che una classe abbia una sola istanza, fornendo al contempo un punto di accesso globale a quest'ultima istanza. E' stato utilizzato per effettuare la connessione al database.
