@@ -91,16 +91,22 @@ function checkHeader(req: any, res: Response, next: NextFunction) {
  * @param res risposta da parte del sistema
  * @param next riferimento al middleware successivo
  */
- export function verifyKey(req: any, res: any, next: any): void{
+ export function verifyKey(req: any, res: Response, next: NextFunction): void{
     try {
-        const decoded: string | jwt.JwtPayload  = jwt.verify(req.token, process.env.KEY);
         logger.info(process.env.KEY);
+  
+        const authHeader = req.headers["authorization"];
+        const token = authHeader && authHeader.split(" ")[1];
+
+        const decoded: string | jwt.JwtPayload = jwt.verify(token, process.env.KEY)
+ 
         if (decoded != null) {
-            req.body = decoded;
+            req.body=decoded;
             next();
         }
+
     } catch (error) { 
-        res.status(403).json({ "error": "invalid" });
+        res.status(403).json({ "error": "invalid KEY" });
     }
 }
 

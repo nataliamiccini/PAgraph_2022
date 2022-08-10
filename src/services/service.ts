@@ -12,16 +12,17 @@ export async function VersionsList(date:Date,id_edge:string,FKid_graph:number,re
   let a;
 
   if(!date && !id_edge){
-    a = await Edge.findAll({attributes:["versions"], where:{FKid_graph:FKid_graph}});
+    a = await Edge.findAll({attributes:["versions"], group:['versions'], where:{FKid_graph:FKid_graph}});
   
     }else if(!date&& id_edge){
-      a = await Edge.findAll({attributes:["versions"],where:{id_edge:id_edge, FKid_graph:FKid_graph} });
+      a = await Edge.findAll({attributes:["versions"],group:['versions'],where:{id_edge:id_edge, FKid_graph:FKid_graph} });
   
     }else if(!id_edge && date){
-      a = await Edge.findAll({attributes:["versions"], where:{modify_date:date, FKid_graph:FKid_graph}});
+      a = await Edge.findAll({attributes:["versions"], group:['versions'],where:{modify_date:date, FKid_graph:FKid_graph}});
     }
   return a;
   }
+
 
 export async function ModelList(date:Date,id_edge:string,res:any):Promise<Array<any>>{
 let a=[];
@@ -55,31 +56,6 @@ if(!date && !id_edge){
   return (Array.from(mapModel));
 }
 
-export function showAllGraph(req: any, res: any) {
-  Edge.findAll({}).then(arr=>{
-      console.log(arr);
-      res.json(arr);
-  });
-};
-
-export function test(id_graph:number, res:any){
-  let elem=[];
-  Edge.findAll({attributes: ['node_a'], where:{id_graph: id_graph}}).then( arr => {
-      res.json(arr);
-  });
-};
-
-export  async function nodi(req:number,res:any):Promise<number>{
- 
-  //await Edge.findAll({attributes: ['id_edge'],where:{FKid_graph: req}})
-    //res.json(arr);
-    
-    let {count ,rows }= await Edge.findAndCountAll({where: {FKid_graph: req}})
-    console.log("********"+count);
-    return count;
- 
-}
-
 export async function WeightOfNodes(id_edge: string):Promise<any>{
   let elem=[];
    await Edge.findAll({attributes: ['weight_edge'], where:{ id_edge: id_edge}}).then(arr=>{
@@ -90,23 +66,6 @@ export async function WeightOfNodes(id_edge: string):Promise<any>{
   return elem;
 }
 
-/*export async function test ():Promise<any>{
-  let a;
-  let A=["a","0.146lnqn473k"]
-  A.forEach(
-    function(x){
-  sequelize.query("SELECT * from graph where id_edge="+"'"+x+"'",
-  {raw:true,
-    type:QueryTypes.SELECT}
-    ).then(arr2=>{
-      console.log(arr2)
-      console.log("ok")
-      a=arr2
-    });
-
-   } )
-return a;
-}*/
 export async function findMax():Promise<any>{
   let result=await sequelize.query(
     "SELECT MAX(versions) as max1 FROM edge",
@@ -118,18 +77,18 @@ return (c.map(item=>(item as any).max1))
 }
 
 export async function updateWeight(new_weight: number, id_edge:any, res:any){
-  let alpha=0.8;
+  let alpha=process.env.ALPHA;
   let keys;
-let version;
-let graphID
-let c;
-let d;
-let m=Number(await findMax())
+  let version;
+  let graphID;
+  let c;
+  let d;
+  let m=Number(await findMax());
 
   id_edge.forEach(
   async function(x){
 
-    version= await sequelize.query(
+     version= await sequelize.query(
     "SELECT versions  FROM edge where id_edge="+"'"+x+"'",
     {raw:true,
     type:QueryTypes.SELECT}) 
@@ -154,17 +113,17 @@ let m=Number(await findMax())
       let ID = Math.random().toString(36);
 
       if(keys[i].id_edge===x) {     
-      Edge.create({id_edge:ID, node_a:keys[i].node_a, node_b:keys[i].node_b,versions:m, weight_edge:alpha*keys[i].weight_edge+(1-alpha)*new_weight,modify_date:"2022-07-31T15:40:00+01:00",FKuser_id:keys[i].FKuser_id,FKid_graph:keys[i].FKid_graph})
+      Edge.create({id_edge:ID, node_a:keys[i].node_a, node_b:keys[i].node_b,versions:m, weight_edge:Number(alpha)*keys[i].weight_edge+(1-Number(alpha))*new_weight,modify_date:Date.now(),FKuser_id:keys[i].FKuser_id,FKid_graph:keys[i].FKid_graph})
       
     }else {
-      Edge.create({id_edge:ID, node_a:keys[i].node_a, node_b:keys[i].node_b,versions:m, weight_edge:keys[i].weight_edge,modify_date:"2022-07-31T15:40:00+01:00",FKuser_id:keys[i].FKuser_id,FKid_graph:keys[i].FKid_graph})
+      Edge.create({id_edge:ID, node_a:keys[i].node_a, node_b:keys[i].node_b,versions:m, weight_edge:keys[i].weight_edge,modify_date:Date.now(),FKuser_id:keys[i].FKuser_id,FKid_graph:keys[i].FKid_graph})
     }
     
   }
      
   });
-  });
- 
+  }
+  );
 }
 
 /**
@@ -260,17 +219,6 @@ export function createGraph(req:any,FKuser_id:any,FKid_graph:any,res:any){
   //Graph.create({id_graph:max, tot_node:n_esterni, tot_edge: n_archi, cost:tot})
   return tot ;
 }; 
-/*export async function updateGraph(req:any,idGraph:any,res:any){
-  let tot_edge
-  let tot_node
-  
-  tot_edge= await n_edge(idGraph,res)
-  tot_node= await n_nodi(idGraph,res)
-  console.log("tot_edge: "+tot_edge)
-
-  Graph.update({tot_node,tot_edge},{where:{id_graph:idGraph}});
-
-}*/
 
 export async function updateE(){
   let idGraph=await MaxidGraph()
@@ -287,7 +235,7 @@ export async function updateE(){
 export async function updateN(req:any,FKuser_id,res:any){
   let idGraph=await MaxidGraph()
   let result = await sequelize.transaction(async (t) => {
-    let tot_node= await n_nodi(idGraph,res)
+    let tot_node= await n_nodi(idGraph,res);
     let cost= await createGraph(req,FKuser_id,idGraph,res);
     let {count ,rows }= await Edge.findAndCountAll({where: {FKid_graph: idGraph}})
     await sequelize.query("UPDATE graph SET tot_node= "+tot_node+",tot_edge="+count+ " , cost="+cost+" WHERE id_graph="+idGraph,
@@ -325,15 +273,6 @@ Graph.create({id_graph:idGraph, tot_node:0 ,tot_edge:0, cost:0})
 
 createGraph(req,FKuser_id,idGraph,res);
 };
-
-/*export function endGraph(req:any,FKuser_id:any,res:any){
-
-  let x = createGraph(req,FKuser_id,res)
-  console.log("totale costo "+x)
-  User.decrement({token:x},{where:{id_user:FKuser_id}}).then(arr=>{
-    res.json("Hai pagato un totale di  "+ x + " token")
-  });
-}*/
 
 export async function findGraph(id_graph: number, versions: number, res: any): Promise< Map<string, Object>>{
   let map2: Map<string, Object> = new Map();
@@ -379,7 +318,7 @@ export async function pathV(id_graph: number, versions: number, node_a: string, 
   ar.push({"timestamp" : String(Number(end - start) + " ms")})
  return ar
 };
-
+//calcolo numero nodi a partire dal grafo creato
 export async function n_nodi(req: any, res: any): Promise<number>{
   let tot_node = new Set
   await Edge.findAll({where: {FKid_graph: req}}).then(arr => {
@@ -393,21 +332,7 @@ export async function n_nodi(req: any, res: any): Promise<number>{
   return tot_node.size
 };
 
-export  function n_edge1(FKid_graph: any, res:any){
- 
-  /*let count =  sequelize.query(
-    "SELECT COUNT(FKid_graph) as num FROM edge WHERE FKid_graph="+FKid_graph,
-    {raw:true,
-      type:QueryTypes.RAW})
-  
-  let Max=(Object.values(count))
-
-  let tot_edge= (Max.map(item=>(item as any).num));
-  console.log(tot_edge)
-
-  return tot_edge*/ 
-};
-
+//calcolo numero archi a partire dal grafo grato
 export async function n_edge(FKid_graph: any, res:any): Promise<number>{
   let tot_edge = new Set
   await Edge.findAll({where: {FKid_graph: FKid_graph}}).then(arr => {
@@ -419,6 +344,11 @@ export async function n_edge(FKid_graph: any, res:any): Promise<number>{
   console.log(tot_edge)
   return tot_edge.size
 };
+
+//calcolo numero nodi a partire dal body
+export async function NumNodeGraph(){
+
+}
 
 export async function cost(req: any, res: any): Promise<number>{
  // let tot_edge = new Set

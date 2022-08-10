@@ -6,9 +6,13 @@ function checkUserExistence(req: any, res: any, next: any) {
     (check ) ? next() : res.status(500).json({"error": "User not found"});
     });
 };
-
+function checkUserExistenceParam(req: any, res: any, next: any) {
+    Service.checkUser(req.params['FKuser_id'], res).then((check) => {
+    (check ) ? next() : res.status(500).json({"error": "User not found"});
+    });
+};
 function checkCreatorExistence(req: any, res: any, next: any) {
-    Service.checkCrator(req.body.FKuser_id, res).then((check) => {
+    Service.checkCrator(req.body.user_id, res).then((check) => {
     (check ) ? next() : res.status(500).json({"error": "User not found"});
     });
 };
@@ -25,6 +29,11 @@ function checkEdgeExistance(req: any, res: any, next: any) {
     });
 };
 
+function checkTokenParam(req: any, res: any, next: any) : void {
+    Service.checkToken(req.params['FKuser_id'], req.body.id_graph, res).then((check) => {
+    (check) ? next() : res.status(500).json({"error": "Tokens not enough"});
+    });
+};
 function checkToken(req: any, res: any, next: any) : void {
     Service.checkToken(req.body.id_user, req.body.id_graph, res).then((check) => {
     (check) ? next() : res.status(500).json({"error": "Tokens not enough"});
@@ -38,7 +47,7 @@ function checkUser(req: any, res: any, next: any) : void {
 };
 
 function checkAdmin(req: any, res: any, next: any) : void {
-    Service.checkRole(req.body.fkcreator_id, res).then((role) => {
+    Service.checkRole(req.body.id_user, res).then((role) => {
     (role == 1) ? next() : res.status(500).json({"error": "User not admin"});
     });
 };
@@ -46,9 +55,11 @@ function checkAdmin(req: any, res: any, next: any) : void {
 
 export default {
     checkUserExistence,
+    checkUserExistenceParam,
     checkGraphExistence,
     checkEdgeExistance,
     checkToken,
+    checkTokenParam,
     checkUser,
     checkCreatorExistence,
     checkAdmin

@@ -28,6 +28,7 @@ services:
           - MYSQL_PORT=3306
           - MYSQL_USER=user
           - MYSQL_PASSWORD=root
+          - KEY=$KEY
         env_file:
           - .env
         depends_on:

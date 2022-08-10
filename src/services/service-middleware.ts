@@ -60,18 +60,27 @@ export async function checkCrator ( FKuser_id: string, res: any): Promise<boolea
  */
  export async function checkEdgeExistance ( id_edge: any, res: any): Promise<boolean> {
     let result: any
-    result =[]
     let x=0;
-    id_edge.forEach(
-      async  function(x){
-            await Edge.findByPk(x).then( arr => {
-                    if (this.lenght!=0) x++ 
+
+    let id=[];
+   
+    for (var key in id_edge) {
+      if (id_edge.hasOwnProperty(key)) {
+        id.push(id_edge[key]);
+      }
+    }
+   for (let i=0;i<id.length;i++)
+          {  
+            console.log(id_edge[i])
+            await Edge.findByPk(id_edge[i]).then( arr => {
+                    if (this.lenght!=0) {
+                        x++;
+                    }
                 });
-                
-        }
-    )
-    (x==id_edge.lenght)? result= true : result= false;
- return result;
+            }
+
+   (x==id.length)? result= true : result= false;
+    return result;
 };
 
 /**

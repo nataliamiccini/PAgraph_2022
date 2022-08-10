@@ -4,7 +4,6 @@ import mid from './user-middleware';
 export const authjwt = [
     authJwt.checkHeader,
     authJwt.checkPayloadHeader,
-    authJwt.checkToken,
     authJwt.verifyKey,
     authJwt.logErrors,
     authJwt.errorHandler
@@ -22,10 +21,15 @@ export const Token = [
     mid.checkToken
 ];
 
-export const Graph=[
-    mid.checkUserExistence,
-    mid.checkGraphExistence,
-    authJwt.checkPayloadHeader
+export const TokenParam = [
+    mid.checkTokenParam
+];
+
+export const GraphParam=[
+    authJwt.checkPayloadHeader,
+    mid.checkUserExistenceParam,
+    mid.checkGraphExistence
+    
 ];
 
 export const UserExistance = [
@@ -39,20 +43,6 @@ export const GraphExistance = [
 export const EdgeExistance = [
     mid.checkEdgeExistance
 ];
-
-export const Existance = [
-    mid.checkUserExistence,
-    mid.checkGraphExistence,
-    mid.checkEdgeExistance
-];
-
-
-
-/*export const check = [
-    mid.checkAuctionOpen,
-    mid.checkEnglishAuction,
-    mid.checkToken
-];*/
 
 export const user = [
     mid.checkUser
