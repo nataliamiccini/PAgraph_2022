@@ -456,22 +456,35 @@ export async function chargingAdmin ( user_id: string, user: string, token: numb
   });
 };
 
-export async function simulation (id_edge: number, start: number, end: number, increment: number, node_a: string, node_b: string, res: any ): Promise<any>  {
-  const ar = await Edge.findAll({attributes: ["node_a", "node_b", "versions", "FKid_graph"], where: {id_edge: id_edge}})
-  let map = await findGraph(ar[0].getDataValue("FKid_graph"), ar[0].getDataValue("versions"), res)
-  let b = await map.get(ar[0].getDataValue("node_a"))
-  let arr =[]
+export async function getInfo(id_edge: number[]): Promise<any>{
+  let array: Array<Object> = new Array
+  for( let x of id_edge)  {
+    await Edge.findAll({attributes: ["node_a", "node_b", "versions", "FKid_graph"], where: {id_edge: x}}).then(ar => {
+      array.push(JSON.parse(JSON.stringify(ar)))
+    })
+  }
+  return array
+};
+
+
+export async function simulationSeq (id_edge: number[], start: number[], end: number[], increment: number[], node_a: string, node_b: string, res: any ): Promise<any>  {
+  const ar = await getInfo(id_edge)
+  let map = await findGraph(ar[0][0].FKid_graph, ar[0][0].versions, res)
+  let arr = []
   let arrg = []
-  for (let i = Number(start); i <= Number(end); i+=Number(increment) ){ 
-    b[ar[0].getDataValue("node_b")] = i
-    let map1 = new Map(JSON.parse(JSON.stringify(Array.from(map))))
-    console.log(map1)
-    
-    arrg.push(map1)
-    
-    let route = new Graph1(Object.fromEntries(map1))
-    
-    arr.push(route.path(node_a, node_b, {cost: true}))
+  let b = []
+  for ( let i = 0; i < id_edge.length; i++){
+    b.push(map.get(ar[i][0].node_a))
+    for (let y = Number(start[i]); y <= Number(end[i]); y+= Number(increment[i]) ){
+      b[i][ar[i][0].node_b]=y
+      let map1 = new Map(JSON.parse(JSON.stringify(Array.from(map))))
+      
+      arrg.push(map1)
+      
+      let route = new Graph1(Object.fromEntries(map1))
+      
+      arr.push(route.path(node_a, node_b, {cost: true}))
+    }
   }
   const min_cost = Math.min(...arr.map(o => o.cost))
   arr.push({"The best result costs: ": min_cost})
@@ -479,6 +492,7 @@ export async function simulation (id_edge: number, start: number, end: number, i
   const index = arr.findIndex((co) => co.cost === min_cost);
   arr.push({"The best result is obtained with the follow graph: ": Object.fromEntries(arrg[index])})
   
+
 return arr
 
 };
