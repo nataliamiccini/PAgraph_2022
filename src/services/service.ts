@@ -496,3 +496,45 @@ export async function simulationSeq (id_edge: number[], start: number[], end: nu
 return arr
 
 };
+
+export async function SimulationPar (id_edge: number[], start: number[], end: number[], increment: number[], node_a: string, node_b: string, res: any ): Promise<Array<any>>  {
+  const ar = await getInfo(id_edge)
+  let map = await findGraph(ar[0][0].FKid_graph, ar[0][0].versions, res)
+  let arr = []
+  let arrg = []
+  let b = []
+  let s = []
+  for ( let i = 0; i < id_edge.length; i++){
+    let val = map.get(ar[i][0].node_a)
+    val[ar[i][0].node_b]=start[i] 
+    b.push(val)
+    s.push(b[i][ar[i][0].node_b])
+  }
+  let map1 = new Map(JSON.parse(JSON.stringify(Array.from(map))))
+  arrg.push(map1)
+  while (JSON.stringify(s)!==JSON.stringify(end)) {
+    for( let i =0; i < id_edge.length; i++) {
+      if (b[i][ar[i][0].node_b] != end[i] ){
+        b[i][ar[i][0].node_b]+=increment[i]
+        s[i]+=increment[i]
+      }
+    }
+  let map2 = new Map(JSON.parse(JSON.stringify(Array.from(map))))
+  arrg.push(map2)
+  }
+  for(let y = 0; y < arrg.length; y++) {
+
+    let route = new Graph1(Object.fromEntries(arrg[y]))
+    arr.push(route.path(node_a, node_b, {cost: true}))
+
+  }
+  const min_cost = Math.min(...arr.map(o => o.cost))
+  arr.push({"The best result costs: ": min_cost})
+  
+  const index = arr.findIndex((co) => co.cost === min_cost);
+  arr.push({"The best result is obtained with the follow graph: ": Object.fromEntries(arrg[index])})
+  
+
+return arr
+};
+
