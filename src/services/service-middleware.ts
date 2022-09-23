@@ -209,8 +209,8 @@ export async function tot_cost(req: any): Promise<any> {
 
 export async function checkZero ( id_user: string): Promise<boolean>{
   let result
-  User.findAll({attributes: ['token'], where: { id_user: id_user}}).then(arr => {
-    (arr[0].getDataValue('token')===0) ? result = true : result = false
+  await User.findAll({attributes: ['token'], where: { id_user: id_user}}).then(arr => {
+    (arr[0].getDataValue('token')!=0) ? result = true : result = false
   })
   return result
 }
