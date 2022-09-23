@@ -657,7 +657,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"user_id\":\"Wos78BnB09\"\n}",
+					"raw": "{\n    \"id_user\":\"Wos78BnB09\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -685,7 +685,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user_id\":\"Wos78BnB09\"\n}",
+							"raw": "{\n    \"id_user\":\"Wos78BnB09\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -816,7 +816,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"user_id\":\"Wos78BnB09\",\n    \"request_id\" :\"767f\"\n}",
+					"raw": "{\n    \"id_user\":\"Wos78BnB09\",\n    \"request_id\" :\"767f\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -844,7 +844,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user_id\":\"Wos78BnB09\",\n    \"request_id\" :\"767f\"\n}",
+							"raw": "{\n    \"id_user\":\"Wos78BnB09\",\n    \"request_id\" :\"767f\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -907,7 +907,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user_id\":\"Wos7nB09\",\n    \"request_id\" :\"767f\"\n}",
+							"raw": "{\n    \"id_user\":\"Wos7nB09\",\n    \"request_id\" :\"767f\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -970,7 +970,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user_id\":\"nf8H41T5sz\",\n    \"request_id\" :\"767f\"\n}",
+							"raw": "{\n    \"id_user\":\"nf8H41T5sz\",\n    \"request_id\" :\"767f\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1038,7 +1038,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"user_id\":\"Wos78BnB09\",\n    \"request_id\": \"866d\"\n}",
+					"raw": "{\n    \"id_user\":\"Wos78BnB09\",\n    \"request_id\": \"866d\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1066,7 +1066,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user_id\":\"Wos78BnB09\",\n    \"request_id\": \"866d\"\n}",
+							"raw": "{\n    \"id_user\":\"Wos78BnB09\",\n    \"request_id\": \"866d\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
