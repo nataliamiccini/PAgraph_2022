@@ -115,13 +115,13 @@ export async function ModelList(date: Date, id_edge: string, res: any): Promise<
   let id;
   let mapModel: Map<number, number[] > = new Map();
   if(!date && !id_edge){
-      a = await Edge.findAll({attributes: ["FKid_graph", "versions"]});
+      a = await Edge.findAll({attributes: ["FKid_graph"], group: ['FKid_graph']});
 
   } else if(!date&& id_edge){
-      a = await Edge.findAll({attributes: ["FKid_graph", "versions"], where: {id_edge: id_edge} });
+      a = await Edge.findAll({attributes: ["FKid_graph"], group: ['FKid_graph'], where: {id_edge: id_edge} });
 
   } else if(!id_edge && date){
-      a = await Edge.findAll({attributes: ["FKid_graph", "versions"], where: {modify_date: date}});
+      a = await Edge.findAll({attributes: ["FKid_graph"], group: ['FKid_graph'], where: {modify_date: date}});
   }
 
   for(let k =0; k<a.length;k++){
@@ -147,13 +147,13 @@ export async function ModelList(date: Date, id_edge: string, res: any): Promise<
  * 
  * @returns valore massimo
  */
-export async function findMax():Promise<any>{
-  let result=await sequelize.query(
+export async function findMax() : Promise<any>{
+  let result = await sequelize.query(
     "SELECT MAX(versions) as max1 FROM edge",
     {
     type:QueryTypes.SELECT}
   ) 
-  let c=(Object.values(result))
+  c=(Object.values(result))
   return (c.map(item=>(item as any).max1))
 };
 
@@ -166,7 +166,7 @@ export async function findMax():Promise<any>{
  * @param id_edge id dell'arco
  * @param res risposta da parte del server
  */
-export async function updateWeight(new_weight: number, id_edge:any, res:any){
+export async function updateWeight(new_weight: number, id_edge: any, res:any){
   let alpha = process.env.ALPHA
  // (0 < process.env.ALPHA  < 1 )? alpha = process.env.ALPHA : alpha = 0.9
   let keys;
@@ -180,8 +180,8 @@ export async function updateWeight(new_weight: number, id_edge:any, res:any){
   async function(x){
 
      version= await sequelize.query(
-    "SELECT versions  FROM edge where id_edge="+"'"+x+"'",
-    {raw:true,
+    "SELECT versions  FROM edge where id_edge=" + " ' " + x + " ' ",
+    {raw: true,
     type:QueryTypes.SELECT}) 
 
     c=(Object.values(version));
@@ -194,7 +194,7 @@ export async function updateWeight(new_weight: number, id_edge:any, res:any){
     d=(Object.values(graphID));
 
     //trovo tutti i campi della tabella edge che hanno versione e id del grafo di quello nel body
-    Edge.findAll({ where:{versions:(c.map(item=>(item as any).versions)),FKid_graph:(d.map(item=>(item as any).FKid_graph))}} ).then(arr2=>{
+    Edge.findAll({ where:{versions:(c.map(item => (item as any).versions)), FKid_graph:(d.map(item => (item as any).FKid_graph))}} ).then(arr2 => {
     m+=1;
     //prendo i valori dell'array di elementi
     keys =Object.values(arr2);
@@ -203,7 +203,7 @@ export async function updateWeight(new_weight: number, id_edge:any, res:any){
 
       let ID = Math.random().toString(36);
 
-      if(keys[i].id_edge===x) {     
+      if(keys[i].id_edge === x) {     
           Edge.create({id_edge:ID, node_a:keys[i].node_a, node_b:keys[i].node_b,versions:m, weight_edge:Number(alpha)*keys[i].weight_edge+(1-Number(alpha))*new_weight,modify_date:Date.now(),FKuser_id:keys[i].FKuser_id,FKid_graph:keys[i].FKid_graph})
       
       }else {
