@@ -2,16 +2,8 @@
 export class MapValue<T>{
     private requests : Array<T>=[];
 
-    constructor(n? : number, defaultValue? : T){
-        if ( n === undefined) {
-            this.requests = [];
-        } else {
-            if ( n && defaultValue){
-                this.requests = Array(n).fill(defaultValue);
-            } else {
-                this.requests = Array(n);
-            }
-        }
+    constructor( requests?: T[]){
+            this.requests = requests;
     }
 
     pushI(item : T){
@@ -23,7 +15,7 @@ export class MapValue<T>{
         this.requests.splice(index,1);
     }
 
-    IndexOf(item:T){
+    IndexOf(item: T){
         return this.requests.indexOf(item);
     }
 
