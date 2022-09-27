@@ -2,8 +2,8 @@
 export class MapValue<T>{
     private requests : Array<T>=[];
 
-    constructor( requests?: T[]){
-            this.requests = requests;
+    constructor(){
+            this.requests = Array<T>();
     }
 
     pushI(item : T){
