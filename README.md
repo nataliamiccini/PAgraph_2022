@@ -32,7 +32,7 @@ Esistono 2 tipi di utenti:
 
 #### Schema ER
 
-<img src = "img_src/dbGraph.png">
+<img src = "img_src/db.png">
 
 Il database è composto da 3 tabelle:
 * USER: contiente tutte le informazioni relative all'utente ed ha come chiave primaria l'id dell'utente.
@@ -43,16 +43,16 @@ Il database è composto da 3 tabelle:
 
 Vengono riportati alcuni diagrammi delle sequenze per descrivere una sequenza di azioni che vengono eseguita quando si accede ad una specifica rotta.
 * **Chiamata POST /createGraph/:FKuser_id :**
-<img src = "img_src/createGraph.drawio.png">
+<img src = "img_src/createGraph2.drawio.png">
 
 * **Chiamata POST /update/:FKuser_id :**
-<img src = "img_src/update.drawio.png">
+<img src = "img_src/update2.drawio.png">
 
 * **Chiamate GET /ShowRequest, GET /AcceptReq, GET /rejectReq :**
-<img src = "img_src/request.drawio.png">
+<img src = "img_src/request2.drawio.png">
 
 * **Chiamata GET /sim-par :**
-<img src = "img_src/simulation.drawio.png">
+<img src = "img_src/simulation2.drawio.png">
 
 ### Pattern utilizzati
 * **Singleton**, un modello di Creational Design Pattern che garantisce che una classe abbia una sola istanza, fornendo al contempo un punto di accesso globale a quest'ultima istanza. E' stato utilizzato per effettuare la connessione al database.
